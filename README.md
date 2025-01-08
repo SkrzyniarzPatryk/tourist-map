@@ -1,5 +1,6 @@
 Run db
 npx json-server db.json
+fix
 
 # React + Vite
 
