@@ -12,6 +12,7 @@
   "dependencies": {
     "bootstrap": "^5.3.3",
     "bootstrap-icons": "^1.11.3",
+    "json-server": "^1.0.0-beta.3",
     "leaflet": "^1.9.4",
     "leaflet-routing-machine": "^3.2.12",
     "prettier": "^3.4.2",

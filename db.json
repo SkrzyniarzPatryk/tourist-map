@@ -1,0 +1,69 @@
+{
+  "points": [
+    {
+      "id": "1",
+      "name": "Zamek Królewski",
+      "description": "Piękny średniowieczny zamek wzniesiony nad rzeką.",
+      "image": "https://via.placeholder.com/400x200",
+      "reviews": 10,
+      "rating": 4.7
+    },
+    {
+      "id": "2",
+      "name": "Muzeum Narodowe",
+      "description": "Muzeum z bogatą kolekcją sztuki i eksponatami historycznymi.",
+      "image": "https://via.placeholder.com/400x200",
+      "reviews": 25,
+      "rating": 4.9
+    },
+    {
+      "id": "3",
+      "name": "Park Narodowy",
+      "description": "Malowniczy park z trasami pieszymi i punktami widokowymi.",
+      "image": "https://via.placeholder.com/400x200",
+      "reviews": 50,
+      "rating": 4.8
+    },
+    {
+      "id": "4",
+      "name": "Zamek Królewski",
+      "description": "Piękny średniowieczny zamek wzniesiony nad rzeką.",
+      "image": "https://via.placeholder.com/400x200",
+      "reviews": 10,
+      "rating": 2
+    },
+    {
+      "id": "e849",
+      "name": "CCi",
+      "description": "Piękny średniowieczny zamek wzniesiony nad rzeką.",
+      "image": "https://via.placeholder.com/400x200",
+      "reviews": 10,
+      "rating": 2
+    }
+  ],
+  "pointss": [
+    {
+      "name": "ell"
+    },
+    {
+      "id": "e110",
+      "name": "CCi",
+      "description": "Piękny średniowieczny zamek wzniesiony nad rzeką.",
+      "image": "https://via.placeholder.com/400x200",
+      "reviews": 10,
+      "rating": 2
+    },
+    {
+      "id": "24b2",
+      "name": "CSSSSi"
+    }
+  ],
+  "psy": [
+    {},
+    {
+      "id": "c38f",
+      "name": "dog",
+      "rasa": "hot"
+    }
+  ]
+}
