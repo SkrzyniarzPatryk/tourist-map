@@ -4,7 +4,6 @@ import { Form, FormControl, Button } from "react-bootstrap";
 
 import "../styles/NavbarStyle.css";
 
-
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
@@ -26,8 +25,7 @@ function Root() {
                 width="90"
                 height="40"
                 className="d-inline-block align-top"
-              />
-              {' '}
+              />{" "}
             </Navbar.Brand>
 
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -37,11 +35,19 @@ function Root() {
                 <Nav.Link href="map">Mapa</Nav.Link>
                 <Nav.Link href="points">Punkty</Nav.Link>
                 <NavDropdown title="Konto użytkownika" id="basic-nav-dropdown">
-                  <NavDropdown.Item href="#action/3.1">Moje punkty</NavDropdown.Item>
-                  <NavDropdown.Item href="#action/3.2">Moje recenzje</NavDropdown.Item>
-                  <NavDropdown.Item href="#action/3.3">Ustawienia</NavDropdown.Item>
+                  <NavDropdown.Item href="#action/3.1">
+                    Moje punkty
+                  </NavDropdown.Item>
+                  <NavDropdown.Item href="#action/3.2">
+                    Moje recenzje
+                  </NavDropdown.Item>
+                  <NavDropdown.Item href="#action/3.3">
+                    Ustawienia
+                  </NavDropdown.Item>
                   <NavDropdown.Divider />
-                  <NavDropdown.Item href="#action/3.4">Log out</NavDropdown.Item>
+                  <NavDropdown.Item href="#action/3.4">
+                    Log out
+                  </NavDropdown.Item>
                 </NavDropdown>
               </Nav>
 
@@ -63,11 +69,20 @@ function Root() {
                   height="30"
                   className="rounded-circle me-2"
                 />
-                <NavDropdown title="" id="user-dropdown" align="end" style={{ color: "#fff" }}>
+                <NavDropdown
+                  title=""
+                  id="user-dropdown"
+                  align="end"
+                  style={{ color: "#fff" }}
+                >
                   <NavDropdown.Item href="#profile">Profil</NavDropdown.Item>
-                  <NavDropdown.Item href="#settings">Ustawienia</NavDropdown.Item>
+                  <NavDropdown.Item href="#settings">
+                    Ustawienia
+                  </NavDropdown.Item>
                   <NavDropdown.Divider />
-                  <NavDropdown.Item href="#logout">Wyloguj się</NavDropdown.Item>
+                  <NavDropdown.Item href="#logout">
+                    Wyloguj się
+                  </NavDropdown.Item>
                 </NavDropdown>
               </div>
             </Navbar.Collapse>

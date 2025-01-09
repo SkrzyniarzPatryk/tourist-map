@@ -37,6 +37,7 @@ const pointsOfInterest = [
     description: "Idealne miejsce na spacer.",
   },
 ];
+const tmp = true;
 
 function App() {
   const router = createBrowserRouter([
@@ -59,7 +60,11 @@ function App() {
         },
         {
           path: "points",
-          element: <PointsPage points={pointsOfInterest} />,
+          element: tmp ? (
+            <PointsPage points={pointsOfInterest} />
+          ) : (
+            <Navigate to="/login" />
+          ),
         },
       ],
     },

@@ -1,47 +1,43 @@
 import React, { useState, useEffect } from "react";
-import { Container, Row, Col, Form, Button, Card, Badge, Spinner } from "react-bootstrap";
+import {
+  Container,
+  Row,
+  Col,
+  Form,
+  Button,
+  Card,
+  Badge,
+  Spinner,
+} from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
+import { pointsService } from "../utils/api/pointsService";
 
 const PointsPage = ({ pois }) => {
-  // Przykładowa tablica punktów
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [points, setPoints] = useState([
-    // {
-    //   id: 1,
-    //   name: "Zamek Królewski",
-    //   description: "Piękny średniowieczny zamek wzniesiony nad rzeką.",
-    //   image: "https://via.placeholder.com/400x200",
-    //   reviews: 10,
-    //   rating: 4.7,
-    // },
-    // {
-    //   id: 2,
-    //   name: "Muzeum Narodowe",
-    //   description: "Muzeum z bogatą kolekcją sztuki i eksponatami historycznymi.",
-    //   image: "https://via.placeholder.com/400x200",
-    //   reviews: 25,
-    //   rating: 4.9,
-    // },
-    // {
-    //   id: 3,
-    //   name: "Park Narodowy",
-    //   description: "Malowniczy park z trasami pieszymi i punktami widokowymi.",
-    //   image: "https://via.placeholder.com/400x200",
-    //   reviews: 50,
-    //   rating: 4.8,
-    // },
-  ]);
+  const [points, setPoints] = useState([]);
+  const [filteredPoints, setFilteredPoints] = useState([]);
 
+  // const fetchPoints = async () => {
+  //   try {
+  //     const response = await fetch("/data/points.json"); // Pobiera dane z pliku JSON
+  //     if (!response.ok) {
+  //       throw new Error("Błąd podczas wczytywania danych");
+  //     }
+  //     const data = await response.json();
+  //     setPoints(data);
+  //   } catch (err) {
+  //     setError(err.message);
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
   const fetchPoints = async () => {
     try {
-      const response = await fetch("/data/points.json"); // Pobiera dane z pliku JSON
-      if (!response.ok) {
-        throw new Error("Błąd podczas wczytywania danych");
-      }
-      const data = await response.json();
-      setPoints(data);
+      const response = await pointsService.getAllPoints();
+      setPoints(response);
+      setFilteredPoints(response);
     } catch (err) {
       setError(err.message);
     } finally {
@@ -49,14 +45,16 @@ const PointsPage = ({ pois }) => {
     }
   };
 
-  // Wczytanie danych po zamontowaniu komponentu
   useEffect(() => {
     fetchPoints();
   }, []);
 
   if (loading) {
     return (
-      <div className="d-flex justify-content-center align-items-center" style={{ height: "100vh" }}>
+      <div
+        className="d-flex justify-content-center align-items-center"
+        style={{ height: "100vh" }}
+      >
         <Spinner animation="border" variant="primary" />
       </div>
     );
@@ -70,14 +68,12 @@ const PointsPage = ({ pois }) => {
     );
   }
   const filterPoints = () => {
-    console.log("Filtruję punkty");
     const minRating = document.getElementById("rating").value;
-    const filteredPoints = points.filter(point => point.rating >= minRating);
-    console.log(filteredPoints);
-}
+    setFilteredPoints(points.filter((point) => point.rating >= minRating));
+  };
 
   return (
-    <Container className="py-3" data-bs-theme="dark"> 
+    <Container className="py-3" data-bs-theme="dark">
       {/* Sekcja filtrów */}
       <Row className="mb-4" style={{ color: "#fff" }}>
         <Col md={3}>
@@ -120,7 +116,7 @@ const PointsPage = ({ pois }) => {
 
       {/* Sekcja z kartami */}
       <Row className="g-4">
-        {points.map((point) => (
+        {filteredPoints.map((point) => (
           <Col md={4} key={point.id}>
             <Card className="h-100 text-white bg-dark border-secondary">
               <div className="position-relative">
@@ -143,7 +139,8 @@ const PointsPage = ({ pois }) => {
                 <Card.Text>{point.description}</Card.Text>
                 <div className="d-flex justify-content-between align-items-center">
                   <Badge bg="secondary">
-                    <i className="bi bi-people"></i> {point.reviews} osób pozytywnie oceniło
+                    <i className="bi bi-people"></i> {point.reviews} osób
+                    pozytywnie oceniło
                   </Badge>
                   <Badge bg="info">
                     <i className="bi bi-star-fill"></i> {point.rating}/5
