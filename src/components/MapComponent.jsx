@@ -16,11 +16,10 @@ const MapComponent = ({ points }) => {
   //     }).addTo(map);
   //   });
   return (
-
     <MapContainer
       center={[50.86605628744675, 20.628193619169046]}
       zoom={14}
-      style={{ height: "calc(-80px + 100vh)", width: "100%" }}
+      style={{ height: "calc(-143px + 100vh)", width: "100%" }}
     >
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -36,7 +35,7 @@ const MapComponent = ({ points }) => {
           </Popup>
         </Marker>
       ))}
-       
+
       <Routing points={points} />
     </MapContainer>
   );

@@ -1,6 +1,6 @@
 import React from "react";
-import { Outlet } from "react-router-dom";
-import { Form, FormControl, Button } from "react-bootstrap";
+import { Links, Outlet, useLocation } from "react-router-dom";
+import { Form, FormControl, Button, Col, Row } from "react-bootstrap";
 
 import "../styles/NavbarStyle.css";
 
@@ -11,6 +11,8 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 
 import appLogo from "../assets/tourist-app-logo.png";
 import usserAccountLogo from "../assets/user_icon.png";
+
+import { Link } from "react-router-dom";
 
 function Root() {
   return (
@@ -88,10 +90,78 @@ function Root() {
             </Navbar.Collapse>
           </Container>
         </Navbar>
-        <div className="bg-dark">
+        <div className="bg-dark" style={{ minHeight: "calc(100vh - 143px)" }}>
           <Outlet />
         </div>
-        <footer>footer</footer>
+        <footer
+          data-bs-theme="dark"
+          className="bg-body-tertiary py-1"
+          style={{ fontSize: "10px" }}
+        >
+          <Container>
+            <Row>
+              <ul className="nav justify-content-center border-bottom mb-2">
+                <li className="nav-item">
+                  <Link to="/" className="nav-link px-2 text-body-secondary">
+                    Strona Główna
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link to="/" className="nav-link px-2 text-body-secondary">
+                    Strona Główna
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link to="/" className="nav-link px-2 text-body-secondary">
+                    Strona Główna
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link to="/" className="nav-link px-2 text-body-secondary">
+                    Strona Główna
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link to="/" className="nav-link px-2 text-body-secondary">
+                    Strona Główna
+                  </Link>
+                </li>
+              </ul>
+
+              <p className="text-center text-body-secondary mb-2">
+                <img
+                  src={appLogo}
+                  alt="logo"
+                  width="50"
+                  className="d-inline-block px-1"
+                />{" "}
+                © {new Date().getFullYear()} Wszelkie prawa zastrzeżone.
+              </p>
+              {/* <Col md={6} className="text-center text-md-start">
+                <p>
+                  © {new Date().getFullYear()} Moja Strona. Wszelkie prawa
+                  zastrzeżone.
+                </p>
+              </Col>
+              <Col md={6} className="text-center text-md-end">
+                <ul className="list-inline">
+                  <li className="list-inline-item">
+                    <Link to="/">Strona Główna</Link>
+                  </li>
+                  <li className="list-inline-item">
+                    <Link to="/about">O Nas</Link>
+                  </li>
+                  <li className="list-inline-item">
+                    <Link to="/contact">Kontakt</Link>
+                  </li>
+                  <li className="list-inline-item">
+                    <Link to="/privacy">Polityka Prywatności</Link>
+                  </li>
+                </ul>
+              </Col> */}
+            </Row>
+          </Container>
+        </footer>
       </div>
     </>
   );

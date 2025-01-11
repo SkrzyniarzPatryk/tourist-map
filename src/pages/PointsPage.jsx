@@ -8,48 +8,54 @@ import {
   Card,
   Badge,
   Spinner,
+  Pagination,
 } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import { pointsService } from "../utils/api/pointsService";
+import Paginator from "../components/PointsPageComponents/Paginator";
 
 const PointsPage = ({ pois }) => {
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [points, setPoints] = useState([]);
-  const [filteredPoints, setFilteredPoints] = useState([]);
+  const [pointsWitchDescr, setPointsWitchDescr] = useState([]);
+  const [fetchingStatus, setFetchingStatus] = useState({
+    loading: true,
+    error: null,
+  });
+  const [paginatedSortedQuery, setPaginatedSortedQuery] = useState({
+    page: 1,
+    pageSize: 6,
+    sortBy: "rating",
+    sortOrder: "desc",
+  });
 
-  // const fetchPoints = async () => {
-  //   try {
-  //     const response = await fetch("/data/points.json"); // Pobiera dane z pliku JSON
-  //     if (!response.ok) {
-  //       throw new Error("Błąd podczas wczytywania danych");
-  //     }
-  //     const data = await response.json();
-  //     setPoints(data);
-  //   } catch (err) {
-  //     setError(err.message);
-  //   } finally {
-  //     setLoading(false);
-  //   }
+  // let sortedQuery = {
+  //   sortBy: "rating",
+  //   sortOrder: "desc",
   // };
+
   const fetchPoints = async () => {
+    // console.log(fetchingStatus);
+    // console.log(paginatedSortedQuery);
     try {
-      const response = await pointsService.getAllPoints();
-      setPoints(response);
-      setFilteredPoints(response);
+      const response =
+        await pointsService.getPaginatedPagePoints(paginatedSortedQuery);
+      setPointsWitchDescr(response);
     } catch (err) {
-      setError(err.message);
+      setFetchingStatus({ ...fetchingStatus, error: err.message });
     } finally {
-      setLoading(false);
+      setFetchingStatus({ ...fetchingStatus, loading: false });
     }
+  };
+  const changePage = (page, perPage) => {
+    if (perPage) setPaginatedSortedQuery({ page: page, pageSize: perPage });
+    else setPaginatedSortedQuery({ ...paginatedSortedQuery, page: page });
   };
 
   useEffect(() => {
     fetchPoints();
-  }, []);
+  }, [paginatedSortedQuery]);
 
-  if (loading) {
+  if (fetchingStatus.loading) {
     return (
       <div
         className="d-flex justify-content-center align-items-center"
@@ -60,16 +66,17 @@ const PointsPage = ({ pois }) => {
     );
   }
 
-  if (error) {
+  if (fetchingStatus.error) {
     return (
       <div className="text-center text-danger">
-        <p>Błąd: {error}</p>
+        <p>Błąd: {fetchingStatus.error}</p>
       </div>
     );
   }
   const filterPoints = () => {
     const minRating = document.getElementById("rating").value;
-    setFilteredPoints(points.filter((point) => point.rating >= minRating));
+    fetchPoints();
+    // console.log(fetchingStatus);
   };
 
   return (
@@ -79,7 +86,14 @@ const PointsPage = ({ pois }) => {
         <Col md={3}>
           <Form.Group controlId="category">
             <Form.Label>Kategoria</Form.Label>
-            <Form.Select>
+            <Form.Select
+              onChange={(e) =>
+                setPaginatedSortedQuery({
+                  ...paginatedSortedQuery,
+                  pageSize: e.target.value,
+                })
+              }
+            >
               <option value="">Wszystkie</option>
               <option value="1">Muzea</option>
               <option value="2">Parki</option>
@@ -116,7 +130,7 @@ const PointsPage = ({ pois }) => {
 
       {/* Sekcja z kartami */}
       <Row className="g-4">
-        {filteredPoints.map((point) => (
+        {pointsWitchDescr.data.map((point) => (
           <Col md={4} key={point.id}>
             <Card className="h-100 text-white bg-dark border-secondary">
               <div className="position-relative">
@@ -150,6 +164,58 @@ const PointsPage = ({ pois }) => {
             </Card>
           </Col>
         ))}
+      </Row>
+      {/* <Paginator pointsData={points} /> */}
+      <Row>
+        <Col>
+          <Pagination className="justify-content-center mt-4">
+            <Form.Select
+              value={paginatedSortedQuery.pageSize}
+              style={{
+                width: "150px",
+                borderRadius:
+                  "var(--bs-border-radius) 0 0 var(--bs-border-radius)",
+                backgroundColor: "var(--bs-pagination-bg)",
+              }}
+              onChange={(e) => changePage(1, e.target.value)}
+            >
+              {[3, 6, 9].map((pageSize) => (
+                <option key={pageSize} value={pageSize}>
+                  {pageSize} na stronę
+                </option>
+              ))}
+            </Form.Select>
+            <Pagination.First
+              disabled={pointsWitchDescr.prev === null}
+              onClick={() => changePage(pointsWitchDescr.first)}
+            />
+            <Pagination.Prev
+              disabled={pointsWitchDescr.prev === null}
+              onClick={() =>
+                pointsWitchDescr.prev && changePage(pointsWitchDescr.prev)
+              }
+            />
+            {Array.from({ length: pointsWitchDescr.pages }, (_, idx) => (
+              <Pagination.Item
+                key={idx + 1}
+                active={paginatedSortedQuery.page === idx + 1}
+                onClick={() => changePage(idx + 1)}
+              >
+                {idx + 1}
+              </Pagination.Item>
+            ))}
+            <Pagination.Next
+              disabled={pointsWitchDescr.next === null}
+              onClick={() =>
+                pointsWitchDescr.next && changePage(pointsWitchDescr.next)
+              }
+            />
+            <Pagination.Last
+              disabled={pointsWitchDescr.next === null}
+              onClick={() => changePage(pointsWitchDescr.last)}
+            />
+          </Pagination>
+        </Col>
       </Row>
     </Container>
   );

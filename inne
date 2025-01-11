@@ -1,0 +1,14 @@
+// const fetchPoints = async () => {
+//   try {
+//     const response = await fetch("/data/points.json"); // Pobiera dane z pliku JSON
+//     if (!response.ok) {
+//       throw new Error("Błąd podczas wczytywania danych");
+//     }
+//     const data = await response.json();
+//     setPoints(data);
+//   } catch (err) {
+//     setError(err.message);
+//   } finally {
+//     setLoading(false);
+//   }
+// };
