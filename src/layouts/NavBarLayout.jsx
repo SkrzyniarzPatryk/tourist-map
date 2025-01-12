@@ -14,17 +14,16 @@ import usserAccountLogo from "../assets/user_icon.png";
 
 import { Link } from "react-router-dom";
 
-function Root() {
+function Root({ isUserLogged, logoutUser }) {
   return (
     <>
       <div>
         <Navbar expand="lg" className="bg-body-tertiary" data-bs-theme="dark">
           <Container>
-            <Navbar.Brand href="home">
+            <Navbar.Brand as={Link} to="home">
               <img
                 src={appLogo}
                 alt="logo"
-                width="90"
                 height="40"
                 className="d-inline-block align-top"
               />{" "}
@@ -33,21 +32,27 @@ function Root() {
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="me-auto">
-                <Nav.Link href="home">Strona główna</Nav.Link>
-                <Nav.Link href="map">Mapa</Nav.Link>
-                <Nav.Link href="points">Punkty</Nav.Link>
+                <Nav.Link as={Link} to="home">
+                  Strona główna
+                </Nav.Link>
+                <Nav.Link as={Link} to="map">
+                  Mapa
+                </Nav.Link>
+                <Nav.Link as={Link} to="points">
+                  Punkty
+                </Nav.Link>
                 <NavDropdown title="Konto użytkownika" id="basic-nav-dropdown">
-                  <NavDropdown.Item href="#action/3.1">
+                  <NavDropdown.Item as={Link} to="#action/3.1">
                     Moje punkty
                   </NavDropdown.Item>
-                  <NavDropdown.Item href="#action/3.2">
+                  <NavDropdown.Item as={Link} to="#action/3.2">
                     Moje recenzje
                   </NavDropdown.Item>
-                  <NavDropdown.Item href="#action/3.3">
+                  <NavDropdown.Item as={Link} to="#action/3.3">
                     Ustawienia
                   </NavDropdown.Item>
                   <NavDropdown.Divider />
-                  <NavDropdown.Item href="#action/3.4">
+                  <NavDropdown.Item as={Link} to="#action/3.4">
                     Log out
                   </NavDropdown.Item>
                 </NavDropdown>
@@ -64,28 +69,42 @@ function Root() {
               </Form>
 
               <div className="d-flex align-items-center">
-                <img
-                  src={usserAccountLogo}
-                  alt="User Avatar"
-                  width="30"
-                  height="30"
-                  className="rounded-circle me-2"
-                />
-                <NavDropdown
-                  title=""
-                  id="user-dropdown"
-                  align="end"
-                  style={{ color: "#fff" }}
-                >
-                  <NavDropdown.Item href="#profile">Profil</NavDropdown.Item>
-                  <NavDropdown.Item href="#settings">
-                    Ustawienia
-                  </NavDropdown.Item>
-                  <NavDropdown.Divider />
-                  <NavDropdown.Item href="#logout">
-                    Wyloguj się
-                  </NavDropdown.Item>
-                </NavDropdown>
+                {isUserLogged ? (
+                  <>
+                    <img
+                      src={usserAccountLogo}
+                      alt="User Avatar"
+                      width="30"
+                      height="30"
+                      className="rounded-circle me-2"
+                    />
+                    <NavDropdown
+                      title=""
+                      id="user-dropdown"
+                      align="end"
+                      style={{ color: "#fff" }}
+                    >
+                      <NavDropdown.Item as={Link} to="#profile">
+                        Profil
+                      </NavDropdown.Item>
+                      <NavDropdown.Item as={Link} to="#settings">
+                        Ustawienia
+                      </NavDropdown.Item>
+                      <NavDropdown.Divider />
+                      <NavDropdown.Item
+                        as={Link}
+                        to="#logout"
+                        onClick={() => logoutUser()}
+                      >
+                        Wyloguj się
+                      </NavDropdown.Item>
+                    </NavDropdown>
+                  </>
+                ) : (
+                  <Link to="/login" className="btn btn-primary me-2">
+                    Zaloguj się
+                  </Link>
+                )}
               </div>
             </Navbar.Collapse>
           </Container>

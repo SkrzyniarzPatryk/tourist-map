@@ -33,29 +33,14 @@
       "rating": 2
     }
   ],
-  "pointss": [
+  "users": [
     {
-      "name": "ell"
-    },
-    {
-      "id": "e110",
-      "name": "CCi",
-      "description": "Piękny średniowieczny zamek wzniesiony nad rzeką.",
-      "image": "https://via.placeholder.com/400x200",
-      "reviews": 10,
-      "rating": 2
-    },
-    {
-      "id": "24b2",
-      "name": "CSSSSi"
-    }
-  ],
-  "psy": [
-    {},
-    {
-      "id": "c38f",
-      "name": "dog",
-      "rasa": "hot"
+      "id": "f09e",
+      "username": "john",
+      "email": "john@wp.pl",
+      "password": "1234",
+      "role": "admin",
+      "points": [1, 2]
     }
   ]
 }
