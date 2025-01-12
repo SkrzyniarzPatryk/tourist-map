@@ -15,6 +15,8 @@ import MapPage from "./pages/MapPage";
 import LoginPage from "./pages/LoginPage";
 import PointsPage from "./pages/PointsPage";
 import HomePage from "./pages/HomePage";
+import { useEffect, useState } from "react";
+import { Nav } from "react-bootstrap";
 
 const pointsOfInterest = [
   {
@@ -38,18 +40,32 @@ const pointsOfInterest = [
     description: "Idealne miejsce na spacer.",
   },
 ];
+const tmp = true;
 
 function App() {
+  const [isUserLogged, setIsUserLogged] = useState(false);
+  const loginUser = () => {
+    setIsUserLogged(true);
+  };
+  const logoutUser = () => {
+    setIsUserLogged(false);
+  };
+  useEffect(() => {
+    <Navigate to="/home" />;
+  }, [isUserLogged]);
+
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <NavBarLayout />,
+      element: (
+        <NavBarLayout isUserLogged={isUserLogged} logoutUser={logoutUser} />
+      ),
       errorElement: <ErrorPage />,
       children: [
-        // {
-        //   path: '/',
-        //   element: <Navigate to="/home" replace />,
-        // },
+        {
+          path: "/",
+          element: <Navigate to="/home" replace />,
+        },
         {
           path: "home",
           element: <HomePage />,
@@ -66,7 +82,11 @@ function App() {
     },
     {
       path: "/login",
-      element: <LoginPage />,
+      element: isUserLogged ? (
+        <Navigate to="/home" />
+      ) : (
+        <LoginPage loginUser={loginUser} />
+      ),
     },
   ]);
 
