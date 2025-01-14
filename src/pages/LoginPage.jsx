@@ -9,7 +9,6 @@ import {
   ProgressBar,
 } from "react-bootstrap";
 import { userService } from "../utils/api/userService";
-import { useNavigate } from "react-router-dom";
 
 const LoginPage = ({ loginUser }) => {
   const [status, setStatus] = useState({
@@ -23,7 +22,6 @@ const LoginPage = ({ loginUser }) => {
     password: "",
     confirmPassword: "",
   });
-  const navigate = useNavigate();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;

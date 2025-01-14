@@ -14,6 +14,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import { pointsService } from "../utils/api/pointsService";
 import Paginator from "../components/PointsPageComponents/Paginator";
+import PointCardComponent from "../components/PointsPageComponents/PointCardComponent";
 
 const PointsPage = ({ pois }) => {
   const [pointsWitchDescr, setPointsWitchDescr] = useState([]);
@@ -34,16 +35,18 @@ const PointsPage = ({ pois }) => {
   // };
 
   const fetchPoints = async () => {
-    // console.log(fetchingStatus);
-    // console.log(paginatedSortedQuery);
     try {
       const response =
         await pointsService.getPaginatedPagePoints(paginatedSortedQuery);
       setPointsWitchDescr(response);
-    } catch (err) {
-      setFetchingStatus({ ...fetchingStatus, error: err.message });
-    } finally {
       setFetchingStatus({ ...fetchingStatus, loading: false });
+    } catch (err) {
+      setFetchingStatus({
+        ...fetchingStatus,
+        loading: false,
+        error: err.message,
+      });
+    } finally {
     }
   };
   const changePage = (page, perPage) => {
@@ -73,10 +76,10 @@ const PointsPage = ({ pois }) => {
       </div>
     );
   }
+
+  TODO: "Trzeba zrobić filtrowanie";
   const filterPoints = () => {
-    const minRating = document.getElementById("rating").value;
-    fetchPoints();
-    // console.log(fetchingStatus);
+    //fetchPoints();
   };
 
   return (
@@ -130,38 +133,9 @@ const PointsPage = ({ pois }) => {
 
       {/* Sekcja z kartami */}
       <Row className="g-4">
-        {pointsWitchDescr.data.map((point) => (
+        {pointsWitchDescr.data?.map((point) => (
           <Col md={4} key={point.id}>
-            <Card className="h-100 text-white bg-dark border-secondary">
-              <div className="position-relative">
-                <Button
-                  variant="outline-light"
-                  size="sm"
-                  className="position-absolute top-0 end-0 m-2"
-                >
-                  ❤ Dodaj do ulubionych
-                </Button>
-                <Card.Img
-                  variant="top"
-                  src={point.image}
-                  alt={point.name}
-                  style={{ borderRadius: "15px 15px 0 0" }}
-                />
-              </div>
-              <Card.Body>
-                <Card.Title>{point.name}</Card.Title>
-                <Card.Text>{point.description}</Card.Text>
-                <div className="d-flex justify-content-between align-items-center">
-                  <Badge bg="secondary">
-                    <i className="bi bi-people"></i> {point.reviews} osób
-                    pozytywnie oceniło
-                  </Badge>
-                  <Badge bg="info">
-                    <i className="bi bi-star-fill"></i> {point.rating}/5
-                  </Badge>
-                </div>
-              </Card.Body>
-            </Card>
+            <PointCardComponent point={point} />
           </Col>
         ))}
       </Row>
