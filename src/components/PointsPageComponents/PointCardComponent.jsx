@@ -13,7 +13,7 @@ const PointCardComponent = ({ point }) => {
         </Button>
         <Card.Img
           variant="top"
-          src={point.image}
+          src={point.images[0]}
           alt={point.name}
           style={{ borderRadius: "15px 15px 0 0" }}
         />

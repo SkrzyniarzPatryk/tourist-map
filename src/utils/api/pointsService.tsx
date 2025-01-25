@@ -15,5 +15,11 @@ class PointsService extends BaseApi {
       "?_page=" + paginatedQuery.page + "&_per_page=" + paginatedQuery.pageSize;
     return this.get<PointModel[]>(query);
   }
+
+  async addPoint(point: PointModel): Promise<PointModel> {
+    point.rating = 0;
+    point.reviews = 0;
+    return this.post<PointModel>("", point);
+  }
 }
 export const pointsService = new PointsService();

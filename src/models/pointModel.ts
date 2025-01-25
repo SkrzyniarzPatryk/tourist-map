@@ -4,6 +4,7 @@ export interface PointModel {
   description: string;
   rating: number;
   reviews: number;
-  // category: string;
-  image: string;
+  position: number[];
+  category: number;
+  images: string[];
 }

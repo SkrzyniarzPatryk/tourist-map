@@ -29,11 +29,6 @@ const PointsPage = ({ pois }) => {
     sortOrder: "desc",
   });
 
-  // let sortedQuery = {
-  //   sortBy: "rating",
-  //   sortOrder: "desc",
-  // };
-
   const fetchPoints = async () => {
     try {
       const response =

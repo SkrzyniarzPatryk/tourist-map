@@ -9,7 +9,7 @@ import {
 } from "react-leaflet";
 import L from "leaflet";
 import { useMapEvents } from "react-leaflet/hooks";
-import { Button, Spinner } from "react-bootstrap";
+import { Button, Spinner, Dropdown } from "react-bootstrap";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "leaflet/dist/leaflet.css";
 //import L from 'leaflet';
@@ -20,6 +20,7 @@ import marker1 from "../assets/markers/location-pin-1.png";
 import marker2 from "../assets/markers/location-pin-2.png";
 import marker3 from "../assets/markers/small-location-pin.png";
 import PointCardComponent from "./PointsPageComponents/PointCardComponent";
+import AddPointModal from "./MapPage/AddPointModal";
 
 const MapComponent = ({ pointss }) => {
   const [points, setPoints] = useState([]);
@@ -28,9 +29,9 @@ const MapComponent = ({ pointss }) => {
     error: null,
   });
   const [selectedPoint, setSelectedPoint] = useState(null);
-  const [clickedPoint, setClickedPoint] = useState([
-    50.871848299959176, 20.63844948247584,
-  ]);
+  const [clickedPoint, setClickedPoint] = useState(null);
+  const [contextMenuPosition, setContextMenuPosition] = useState(null);
+  const [showModal, setShowModal] = useState(false);
 
   const fetchPoints = async () => {
     try {
@@ -51,13 +52,44 @@ const MapComponent = ({ pointss }) => {
     useMapEvents({
       click: (e) => {
         setClickedPoint(e.latlng);
+        setContextMenuPosition(null);
       },
-      // dragend: (e) => {
-      //   console.log("stop dragging");
-      // },
+      contextmenu: (e) => {
+        setClickedPoint(e.latlng);
+        console.log(e);
+        setContextMenuPosition({
+          x: e.originalEvent.pageX,
+          y: e.originalEvent.pageY,
+        });
+      },
     });
     return;
   };
+
+  /** Wyświetla menu kontekstowe po kliknięciu prawego przycisku */
+  const CustomContextMenu = (position) => {
+    const { x, y } = position.position;
+    return (
+      <Dropdown.Menu show variant="dark" style={{ top: y, left: x }}>
+        <Dropdown.ItemText>
+          <i className="bi bi-three-dots"></i> Menu
+        </Dropdown.ItemText>
+        <Dropdown.Item onClick={handleShowModal}>
+          <i className="bi bi-plus-circle"></i> Dodaj punkt!
+        </Dropdown.Item>
+        <Dropdown.Divider />
+        <Dropdown.Item eventKey="2">
+          <i className="bi bi-zoom-in"></i> Zbliż
+        </Dropdown.Item>
+        <Dropdown.Item eventKey="3">
+          <i className="bi bi-zoom-out"></i> Oddal
+        </Dropdown.Item>
+      </Dropdown.Menu>
+    );
+  };
+
+  const handleShowModal = () => setShowModal(true);
+  const handleCloseModal = () => setShowModal(false);
 
   const SelectedPointDialog = () => {
     return (
@@ -71,6 +103,7 @@ const MapComponent = ({ pointss }) => {
               background: "rgb(159 161 164)",
               borderRadius: "8px",
               boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
+              width: "400px",
             }}
           >
             <div className="d-flex justify-content-between align-items-center mb-3">
@@ -125,6 +158,16 @@ const MapComponent = ({ pointss }) => {
   return (
     <>
       <SelectedPointDialog />
+
+      {contextMenuPosition && (
+        <CustomContextMenu position={contextMenuPosition} />
+      )}
+
+      <AddPointModal
+        showModal={showModal}
+        handleCloseModal={handleCloseModal}
+        pointPosition={clickedPoint}
+      />
 
       <MapContainer
         center={[50.86605628744675, 20.628193619169046]}

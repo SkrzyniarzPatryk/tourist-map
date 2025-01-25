@@ -18,3 +18,8 @@
 //     waypoints: [L.latLng(52.2297, 21.0122), L.latLng(52.2397, 21.0222)],
 //   }).addTo(map);
 // });
+
+// let sortedQuery = {
+//   sortBy: "rating",
+//   sortOrder: "desc",
+// };
