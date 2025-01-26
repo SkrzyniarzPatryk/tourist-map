@@ -17,6 +17,7 @@ import PointsPage from "./pages/PointsPage";
 import HomePage from "./pages/HomePage";
 import { useEffect, useState } from "react";
 import { Nav } from "react-bootstrap";
+import ReviewsPage from "./pages/ReviewsPage";
 
 const pointsOfInterest = [];
 const tmp = true;
@@ -56,6 +57,10 @@ function App() {
         {
           path: "points",
           element: <PointsPage points={pointsOfInterest} />,
+        },
+        {
+          path: "reviews/:id",
+          element: <ReviewsPage />,
         },
       ],
     },
