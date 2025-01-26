@@ -5,8 +5,8 @@
       "name": "Parafia Prawosławna",
       "description": "Parafia Prawosławna p.w. Św. Mikołaja.",
       "position": [50.871848299559176, 20.63844948247584],
-      "image": "obrazek1.jpg",
-      "reviews": 14,
+      "images": "https://via.placeholder.com/400x200",
+      "reviews": 10,
       "rating": 4.7
     },
     {
@@ -14,8 +14,8 @@
       "name": "Politechnika Świętokrzyska",
       "description": "Idealne miejsce na nauke.",
       "position": [50.87884392604276, 20.640082962655097],
-      "image": "obrazek1.jpg",
-      "reviews": 3,
+      "images": "https://via.placeholder.com/400x200",
+      "reviews": 25,
       "rating": 4.9
     },
     {
@@ -23,8 +23,8 @@
       "name": "Rezerwat Skalny Ślichowice",
       "description": "Malowniczy park z trasami pieszymi i punktami widokowymi.",
       "position": [50.886771479833776, 20.588036449591307],
-      "image": "obrazek1.jpg",
-      "reviews": 5,
+      "images": "https://via.placeholder.com/400x200",
+      "reviews": 50,
       "rating": 4.8
     },
     {
@@ -32,9 +32,40 @@
       "name": "Geonatura Kielce - Ogród Botaniczny",
       "description": "Idealne miejsce na spacer.",
       "position": [50.86789338714975, 20.59837140758464],
-      "image": "obrazek1.jpg",
+      "images": "https://via.placeholder.com/400x200",
       "reviews": 10,
       "rating": 2
+    },
+    {
+      "id": "26b3",
+      "name": "sdasd",
+      "description": "asdas",
+      "position": ["50.869569824829725", "20.625286102294925"],
+      "images": []
+    },
+    {
+      "id": "7be8",
+      "name": "aaaa",
+      "description": "aaaaa",
+      "position": ["50.87520282200388", "20.62588691711426"],
+      "images": ["https://via.placeholder.com/400x200"]
+    },
+    {
+      "id": "828c",
+      "name": "qqqqqqqqq",
+      "description": "qqqqqqqqqqqq",
+      "position": ["50.8668614107797", "20.63515663146973"],
+      "images": ["https://via.placeholder.com/300x150"]
+    },
+    {
+      "id": "3a6b",
+      "name": "centrum",
+      "description": "aacsa",
+      "category": "3",
+      "position": ["50.86583217218042", "20.62296867370606"],
+      "images": ["/exampleImages/centruma.jpg"],
+      "rating": 0,
+      "reviews": 0
     }
   ],
   "users": [
