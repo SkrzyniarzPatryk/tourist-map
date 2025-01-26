@@ -9,8 +9,11 @@ import {
   ProgressBar,
 } from "react-bootstrap";
 import { userService } from "../utils/api/userService";
+import { useAuth } from "../context/AuthProvider";
 
 const LoginPage = ({ loginUser }) => {
+  const { user, login, logout } = useAuth();
+
   const [status, setStatus] = useState({
     loading: false,
     status: "",
@@ -50,7 +53,8 @@ const LoginPage = ({ loginUser }) => {
         password: userDataQuery.password,
       });
       if (response) {
-        loginUser();
+        login(response);
+        loginUser(); ///do zmian
         setStatus({ ...status, status: "success", loading: true });
         // przekierowanie w App
       } else {
@@ -61,6 +65,7 @@ const LoginPage = ({ loginUser }) => {
       setStatus({ ...status, status: "danger", loading: true });
       console.error("error", err);
     } finally {
+      login(true);
       setTimeout(() => {
         setStatus({ ...status, loading: false });
       }, 2000);

@@ -6,8 +6,8 @@ class UserService extends BaseApi {
   }
   async login(data: LoginUserModel): Promise<any> {
     const query = `?username=${data.username}&password=${data.password}`;
-    if ((await this.get<any>(query)).length == 1) return true;
-    else return false;
+    let response = await this.get<any>(query);
+    return response.length == 1 ? response : false;
   }
   async register(email: string, password: string): Promise<any> {}
 }

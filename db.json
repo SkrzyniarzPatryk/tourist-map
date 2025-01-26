@@ -49,6 +49,27 @@
       "images": ["/exampleImages/centruma.jpg"],
       "rating": 0,
       "reviews": 0
+    },
+    {
+      "id": "d41a",
+      "name": "Kościół w bielinach",
+      "description": "Kościół z długą tradycją",
+      "category": "1",
+      "position": ["50.87802138961492", "20.60940742492676"],
+      "images": [
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlULd2bsBVR95lmzCUa7oTTS8oXKCFNZ45Og&s"
+      ],
+      "rating": 0,
+      "reviews": 0
+    }
+  ],
+  "comments": [
+    {
+      "id": "1",
+      "pointId": "1",
+      "userId": "f09e",
+      "content": "Bardzo fajne miejsce",
+      "rating": 5
     }
   ],
   "users": [

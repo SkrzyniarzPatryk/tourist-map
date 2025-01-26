@@ -17,7 +17,8 @@ import PointsPage from "./pages/PointsPage";
 import HomePage from "./pages/HomePage";
 import { useEffect, useState } from "react";
 import { Nav } from "react-bootstrap";
-import ReviewsPage from "./pages/ReviewsPage";
+import { AuthProvider } from "./context/AuthProvider";
+import PointDetailPage from "./pages/PointDetailPage";
 
 const pointsOfInterest = [];
 const tmp = true;
@@ -30,9 +31,10 @@ function App() {
   const logoutUser = () => {
     setIsUserLogged(false);
   };
-  useEffect(() => {
-    <Navigate to="/home" />;
-  }, [isUserLogged]);
+
+  // useEffect(() => {
+  //   <Navigate to="/home" />;
+  // }, [isUserLogged]);
 
   const router = createBrowserRouter([
     {
@@ -59,8 +61,8 @@ function App() {
           element: <PointsPage points={pointsOfInterest} />,
         },
         {
-          path: "reviews/:id",
-          element: <ReviewsPage />,
+          path: "point/:id",
+          element: <PointDetailPage />,
         },
       ],
     },
@@ -76,7 +78,9 @@ function App() {
 
   return (
     <div className="App">
-      <RouterProvider router={router} />
+      <AuthProvider>
+        <RouterProvider router={router} />
+      </AuthProvider>
     </div>
   );
 }
