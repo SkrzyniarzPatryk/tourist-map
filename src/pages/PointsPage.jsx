@@ -15,6 +15,7 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import { pointsService } from "../utils/api/pointsService";
 import Paginator from "../components/PointsPageComponents/Paginator";
 import PointCardComponent from "../components/PointsPageComponents/PointCardComponent";
+import { category } from "../models/category";
 
 const PointsPage = ({ pois }) => {
   const [pointsWitchDescr, setPointsWitchDescr] = useState([]);
@@ -93,9 +94,9 @@ const PointsPage = ({ pois }) => {
               }
             >
               <option value="">Wszystkie</option>
-              <option value="1">Muzea</option>
-              <option value="2">Parki</option>
-              <option value="3">Restauracje</option>
+              {category.list.map((cat) => (
+                <option value={cat.id}>{cat.name}</option>
+              ))}
             </Form.Select>
           </Form.Group>
         </Col>
