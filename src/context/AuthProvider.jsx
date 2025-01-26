@@ -4,24 +4,35 @@ import { Navigate } from "react-router-dom";
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
-  const [isUserLogged, setIsUserLogged] = useState(false);
+  const [user, setUser] = useState(() => {
+    const storedUser = localStorage.getItem("user");
+    console.log(!!localStorage.getItem("user"));
+    return storedUser ? JSON.parse(storedUser) : null;
+  });
+  const [isUserLogged, setIsUserLogged] = useState(
+    !!localStorage.getItem("user"),
+  );
 
   const login = (userData) => {
     setUser(userData);
     setIsUserLogged(true);
+    localStorage.setItem("user", JSON.stringify(userData));
   };
+
   const logout = () => {
     setUser(null);
     setIsUserLogged(false);
+    localStorage.removeItem("user");
   };
 
   useEffect(() => {
-    <Navigate to="/home" />;
+    if (isUserLogged) {
+      <Navigate to="/home" />;
+    }
   }, [isUserLogged]);
 
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider value={{ user, login, logout, isUserLogged }}>
       {children}
     </AuthContext.Provider>
   );

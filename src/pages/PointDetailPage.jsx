@@ -4,7 +4,7 @@ import { useAuth } from "../context/AuthProvider";
 import { Spinner } from "react-bootstrap";
 import { pointsService } from "../utils/api/pointsService";
 
-const PointDetailPage = ({}) => {
+const PointDetailPage = () => {
   const { id } = useParams();
   const { user } = useAuth();
 
@@ -56,7 +56,7 @@ const PointDetailPage = ({}) => {
   return (
     <div style={{ color: "#fff" }}>
       <h1>Recenzje</h1>
-      <p>{point}</p>
+      <p>{point.name}</p>
     </div>
   );
 };

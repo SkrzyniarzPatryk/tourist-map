@@ -13,8 +13,10 @@ import appLogo from "../assets/tourist-app-logo.png";
 import usserAccountLogo from "../assets/user_icon.png";
 
 import { Link } from "react-router-dom";
+import { useAuth } from "../context/AuthProvider";
 
-function Root({ isUserLogged, logoutUser }) {
+function Root() {
+  const { user, isUserLogged, logout } = useAuth();
   return (
     <>
       <div>
@@ -94,7 +96,7 @@ function Root({ isUserLogged, logoutUser }) {
                       <NavDropdown.Item
                         as={Link}
                         to="#logout"
-                        onClick={() => logoutUser()}
+                        onClick={() => logout()}
                       >
                         Wyloguj się
                       </NavDropdown.Item>

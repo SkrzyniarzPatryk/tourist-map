@@ -16,7 +16,6 @@ import { pointsService } from "../utils/api/pointsService";
 import Paginator from "../components/PointsPageComponents/Paginator";
 import PointCardComponent from "../components/PointsPageComponents/PointCardComponent";
 import { category } from "../models/category";
-import { useAuth } from "../context/AuthProvider";
 
 const PointsPage = ({ pois }) => {
   const [pointsWitchDescr, setPointsWitchDescr] = useState([]);

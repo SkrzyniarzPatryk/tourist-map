@@ -42,4 +42,13 @@ export class BaseApi {
     const response = await this.api.delete<T>(url, config);
     return response.data;
   }
+
+  protected async patch<T>(
+    url: string,
+    data?: any,
+    config?: AxiosRequestConfig,
+  ): Promise<T> {
+    const response = await this.api.patch<T>(url, data, config);
+    return response.data;
+  }
 }
