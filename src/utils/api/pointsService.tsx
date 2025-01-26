@@ -19,11 +19,13 @@ class PointsService extends BaseApi {
     let query = "?id=" + id;
     return this.get<PointModel>(query);
   }
+  
 
   async addPoint(point: PointModel): Promise<PointModel> {
     point.rating = 0;
     point.reviews = 0;
     return this.post<PointModel>("", point);
   }
+  
 }
 export const pointsService = new PointsService();

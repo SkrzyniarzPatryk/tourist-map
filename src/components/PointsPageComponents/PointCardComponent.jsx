@@ -27,8 +27,15 @@ const PointCardComponent = ({ point }) => {
           </Badge>
         </div>
         <div className="mt-3 d-flex justify-content-between">
-
-        
+          <Button
+            variant="primary"
+            onClick={() => navigate(`/point/:${point.id}`)}
+          >
+            Zobacz Opinie
+          </Button>
+          <Button variant="secondary">
+            <i className="bi bi-heart"></i>
+          </Button>
         </div>
       </Card.Body>
     </Card>

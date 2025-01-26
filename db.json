@@ -5,8 +5,13 @@
       "name": "Parafia Prawosławna",
       "description": "Parafia Prawosławna p.w. Św. Mikołaja.",
       "category": "1",
-      "position": [50.871848299559176, 20.63844948247584],
-      "images": ["/exampleImages/centruma.jpg"],
+      "position": [
+        50.871848299559176,
+        20.63844948247584
+      ],
+      "images": [
+        "/exampleImages/centruma.jpg"
+      ],
       "reviews": 10,
       "rating": 4.7
     },
@@ -15,8 +20,13 @@
       "name": "Politechnika Świętokrzyska",
       "description": "Idealne miejsce na nauke.",
       "category": "1",
-      "position": [50.87884392604276, 20.640082962655097],
-      "images": ["/exampleImages/centruma.jpg"],
+      "position": [
+        50.87884392604276,
+        20.640082962655097
+      ],
+      "images": [
+        "/exampleImages/centruma.jpg"
+      ],
       "reviews": 25,
       "rating": 4.9
     },
@@ -25,8 +35,13 @@
       "name": "Rezerwat Skalny Ślichowice",
       "description": "Malowniczy park z trasami pieszymi i punktami widokowymi.",
       "category": "3",
-      "position": [50.886771479833776, 20.588036449591307],
-      "images": ["/exampleImages/centruma.jpg"],
+      "position": [
+        50.886771479833776,
+        20.588036449591307
+      ],
+      "images": [
+        "/exampleImages/centruma.jpg"
+      ],
       "reviews": 50,
       "rating": 4.8
     },
@@ -35,8 +50,13 @@
       "name": "Geonatura Kielce - Ogród Botaniczny",
       "description": "Idealne miejsce na spacer.",
       "category": "3",
-      "position": [50.86789338714975, 20.59837140758464],
-      "images": ["/exampleImages/centruma.jpg"],
+      "position": [
+        50.86789338714975,
+        20.59837140758464
+      ],
+      "images": [
+        "/exampleImages/centruma.jpg"
+      ],
       "reviews": 10,
       "rating": 2
     },
@@ -45,8 +65,13 @@
       "name": "centrum",
       "description": "aacsa",
       "category": "3",
-      "position": ["50.86583217218042", "20.62296867370606"],
-      "images": ["/exampleImages/centruma.jpg"],
+      "position": [
+        "50.86583217218042",
+        "20.62296867370606"
+      ],
+      "images": [
+        "/exampleImages/centruma.jpg"
+      ],
       "rating": 0,
       "reviews": 0
     },
@@ -55,7 +80,10 @@
       "name": "Kościół w bielinach",
       "description": "Kościół z długą tradycją",
       "category": "1",
-      "position": ["50.87802138961492", "20.60940742492676"],
+      "position": [
+        "50.87802138961492",
+        "20.60940742492676"
+      ],
       "images": [
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlULd2bsBVR95lmzCUa7oTTS8oXKCFNZ45Og&s"
       ],
@@ -79,7 +107,10 @@
       "email": "john@wp.pl",
       "password": "1234",
       "role": "admin",
-      "points": [1, 2]
+      "points": [
+        1,
+        2
+      ]
     }
   ]
 }
