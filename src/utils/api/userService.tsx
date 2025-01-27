@@ -10,5 +10,13 @@ class UserService extends BaseApi {
     return response.length == 1 ? response : false;
   }
   async register(email: string, password: string): Promise<any> {}
+
+  async updateProfile(id: string, data: any): Promise<any> {
+    return this.patch<any>(`/${id}`, data);
+  }
+
+  async getUserById(id: string): Promise<any> {
+    return this.get<any>(`/${id}`);
+  }
 }
 export const userService = new UserService();

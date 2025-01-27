@@ -7,7 +7,7 @@ import { useEffect } from "react";
 import SelectImagesModal from "./SelectImagesModal";
 import { pointsService } from "../../utils/api/pointsService";
 import { formToJSON } from "axios";
-import { category } from "../../models/category";
+import { category } from "../../models/Category";
 
 const AddPointModal = ({ showModal, handleCloseModal, pointPosition }) => {
   const {

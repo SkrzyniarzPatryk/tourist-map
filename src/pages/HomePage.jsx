@@ -5,7 +5,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import img1 from "../assets/img1.jpg";
 import img2 from "../assets/img2.jpg";
 import img3 from "../assets/img3.jpg";
-import user_icon from "../assets/user_icon.png"; // Dodaj ścieżkę do logo
 import icon2 from "../assets/icon2.png"; // Dodaj ścieżkę do logo
 import icon1 from "../assets/icon1.png"; // Dodaj ścieżkę do logo
 import icon3 from "../assets/icon3.png"; // Dodaj ścieżkę do logo
@@ -142,7 +141,7 @@ const HomePage = () => {
             Znajdź najlepsze atrakcje w Twojej okolicy lub na drugim końcu świata.
           </p>
           <Button as={Link}
-              to="/points"
+              to="/map"
               variant="info"
               >Zobacz więcej</Button>
         </div>
@@ -177,7 +176,9 @@ const HomePage = () => {
           <p>
             Podziel się opiniami i poznaj zdanie innych podróżników.
           </p>
-          <Button variant="info">Zobacz więcej</Button>
+          <Button as={Link}
+          to="/points"
+          variant="info">Zobacz więcej</Button>
         </div>
       </Col>
     </Row>

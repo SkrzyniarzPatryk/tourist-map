@@ -15,7 +15,7 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import { pointsService } from "../utils/api/pointsService";
 import Paginator from "../components/PointsPageComponents/Paginator";
 import PointCardComponent from "../components/PointsPageComponents/PointCardComponent";
-import { category } from "../models/category";
+import { category } from "../models/Category";
 
 const PointsPage = ({ pois }) => {
   const [pointsWitchDescr, setPointsWitchDescr] = useState([]);
@@ -26,8 +26,8 @@ const PointsPage = ({ pois }) => {
   const [paginatedSortedQuery, setPaginatedSortedQuery] = useState({
     page: 1,
     pageSize: 6,
-    sortBy: "rating",
-    sortOrder: "desc",
+    category: "",
+    minRating: 0,
   });
 
   const fetchPoints = async () => {
@@ -46,7 +46,12 @@ const PointsPage = ({ pois }) => {
     }
   };
   const changePage = (page, perPage) => {
-    if (perPage) setPaginatedSortedQuery({ page: page, pageSize: perPage });
+    if (perPage)
+      setPaginatedSortedQuery({
+        ...paginatedSortedQuery,
+        page: page,
+        pageSize: perPage,
+      });
     else setPaginatedSortedQuery({ ...paginatedSortedQuery, page: page });
   };
 
@@ -73,11 +78,6 @@ const PointsPage = ({ pois }) => {
     );
   }
 
-  TODO: "Trzeba zrobić filtrowanie";
-  const filterPoints = () => {
-    //fetchPoints();
-  };
-
   return (
     <Container className="py-3" data-bs-theme="dark">
       {/* Sekcja filtrów */}
@@ -89,7 +89,7 @@ const PointsPage = ({ pois }) => {
               onChange={(e) =>
                 setPaginatedSortedQuery({
                   ...paginatedSortedQuery,
-                  pageSize: e.target.value,
+                  category: e.target.value,
                 })
               }
             >
@@ -106,16 +106,17 @@ const PointsPage = ({ pois }) => {
             <Form.Control
               type="number"
               placeholder="Wpisz ocenę od 0 do 5"
-              min="0"
+              min="1"
               max="5"
-              step="0.5"
+              step="1"
+              onChange={(e) =>
+                setPaginatedSortedQuery({
+                  ...paginatedSortedQuery,
+                  minRating: e.target.value,
+                })
+              }
             />
           </Form.Group>
-        </Col>
-        <Col xl={1} md={3} className="d-flex align-items-end">
-          <Button variant="primary" className="w-100" onClick={filterPoints}>
-            Filtruj
-          </Button>
         </Col>
       </Row>
 
