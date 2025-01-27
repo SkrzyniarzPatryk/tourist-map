@@ -24,6 +24,14 @@ const PointCardComponent = ({ point }) => {
   };
 
   useEffect(() => {
+    try {
+      userService.updateProfile(user.id, { favoritePoints: userFavorite });
+    } catch (err) {
+      console.log(err);
+    }
+  }, [userFavorite]);
+
+  useEffect(() => {
     fetchFavoritePoints();
   }, [isUserLogged, user?.id]);
 
@@ -74,7 +82,11 @@ const PointCardComponent = ({ point }) => {
               {userFavorite.includes(point.id) ? (
                 <Button
                   variant="secondary"
-                  onClick={() => removeFromFavorites(point.id)}
+                  onClick={() =>
+                    setUserFavorite((prev) =>
+                      prev.filter((id) => id !== point.id),
+                    )
+                  }
                 >
                   <i className="bi bi-heart-fill"></i>
                 </Button>
@@ -82,7 +94,6 @@ const PointCardComponent = ({ point }) => {
                 <Button
                   variant="secondary"
                   onClick={() => {
-                    console.log(userFavorite);
                     setUserFavorite((prev) => [...prev, point.id]);
                   }}
                 >
