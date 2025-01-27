@@ -85,9 +85,11 @@ const LoginPage = () => {
         username: userDataQuery.email.split("@")[0],
         email: userDataQuery.email,
         password: userDataQuery.password,
+        favoritePoints: [],
       });
       if (response) {
-        login(response[0]);
+        console.log("response", response);
+        login(response);
         setStatus({ ...status, status: "success", loading: true });
       } else {
         setStatus({ ...status, status: "danger", loading: true });

@@ -43,33 +43,7 @@ function Root() {
                 <Nav.Link as={Link} to="points">
                   Punkty
                 </Nav.Link>
-                <NavDropdown title="Konto użytkownika" id="basic-nav-dropdown">
-                  <NavDropdown.Item as={Link} to="user-points">
-                    Moje punkty
-                  </NavDropdown.Item>
-                  <NavDropdown.Item as={Link} to="#action/3.2">
-                    Moje recenzje
-                  </NavDropdown.Item>
-                  <NavDropdown.Item as={Link} to="#action/3.3">
-                    Ustawienia
-                  </NavDropdown.Item>
-                  <NavDropdown.Divider />
-                  <NavDropdown.Item as={Link} to="#action/3.4">
-                    Log out
-                  </NavDropdown.Item>
-                </NavDropdown>
               </Nav>
-
-              <Form className="d-flex me-3">
-                <FormControl
-                  type="search"
-                  placeholder="Szukaj"
-                  className="me-2"
-                  aria-label="Search"
-                />
-                <Button variant="outline-light">Szukaj</Button>
-              </Form>
-
               <div className="d-flex align-items-center">
                 {isUserLogged ? (
                   <>
@@ -81,16 +55,19 @@ function Root() {
                       className="rounded-circle me-2"
                     />
                     <NavDropdown
-                      title=""
+                      title="Konto użytkownika"
                       id="user-dropdown"
                       align="end"
-                      style={{ color: "#fff" }}
+                      style={{ color: "#aaa" }}
                     >
                       <NavDropdown.Item as={Link} to="user-profile">
                         Profil
                       </NavDropdown.Item>
                       <NavDropdown.Item as={Link} to="user-profile">
                         Ustawienia
+                      </NavDropdown.Item>
+                      <NavDropdown.Item as={Link} to="user-points">
+                        Moje punkty
                       </NavDropdown.Item>
                       <NavDropdown.Divider />
                       <NavDropdown.Item
