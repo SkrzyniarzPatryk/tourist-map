@@ -25,12 +25,6 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem("user");
   };
 
-  useEffect(() => {
-    if (isUserLogged) {
-      <Navigate to="/home" />;
-    }
-  }, [isUserLogged]);
-
   return (
     <AuthContext.Provider value={{ user, login, logout, isUserLogged }}>
       {children}

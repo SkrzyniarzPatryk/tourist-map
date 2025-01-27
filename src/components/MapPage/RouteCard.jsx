@@ -3,7 +3,6 @@ import { useState } from "react";
 import { Button, Card, Form, ListGroup, Spinner, Alert } from "react-bootstrap";
 import { useAuth } from "../../context/AuthProvider";
 import { userRoutesService } from "../../utils/api/userRoutesService";
-import { Routes } from "react-router-dom";
 
 const RouteCard = ({ routeDetails, userRouteList, setUserRouteList }) => {
   const { isUserLogged, user } = useAuth();
@@ -13,10 +12,9 @@ const RouteCard = ({ routeDetails, userRouteList, setUserRouteList }) => {
   const [userRoutes, setUserRoutes] = useState([]);
   const [selectedRouteId, setSelectedRouteId] = useState(null);
   const [isMinimized, setIsMinimized] = useState(false);
+  const [newRouteName, setNewRouteName] = useState("");
 
   useEffect(() => {
-    console.log(routeDetails);
-
     const fetchUserRoutes = async () => {
       if (isUserLogged && user?.id) {
         try {
@@ -33,12 +31,33 @@ const RouteCard = ({ routeDetails, userRouteList, setUserRouteList }) => {
     fetchUserRoutes();
   }, []);
 
+  useEffect(() => {
+    const updateRoute = async () => {
+      if (selectedRouteId && isUserLogged && user?.id) {
+        try {
+          setIsLoading(true);
+          const routes = await userRoutesService.updateRoute(selectedRouteId, {
+            routeList: userRouteList,
+          });
+        } catch (err) {
+          setError("Nie udało się pobrać tras");
+        } finally {
+          setIsLoading(false);
+        }
+      }
+    };
+    updateRoute();
+  }, [userRouteList]);
+
   const handleRouteSelect = async (routeId) => {
     try {
       setIsLoading(true);
-      const route = await userRoutesService.getRouteById(routeId);
-      console.log(route);
-      setUserRouteList(route.routeList);
+      if (routeId) {
+        const route = await userRoutesService.getRouteById(routeId);
+        setUserRouteList(route.routeList);
+      } else {
+        setUserRouteList([]);
+      }
       setSelectedRouteId(routeId);
     } catch (err) {
       setError("Nie udało się załadować trasy");
@@ -46,9 +65,50 @@ const RouteCard = ({ routeDetails, userRouteList, setUserRouteList }) => {
       setIsLoading(false);
     }
   };
-  // useEffect(() => {}, [routeDetails]);
 
-  // Jeśli użytkownik nie jest zalogowany, nie wyświetlaj komponentu
+  const handleAddNewRoute = async () => {
+    if (!newRouteName.trim()) {
+      setError("Nazwa trasy nie może być pusta");
+      return;
+    }
+
+    try {
+      setIsLoading(true);
+      const newRoute = await userRoutesService.createRoute({
+        name: newRouteName,
+        userId: user.id,
+        routeList: [],
+      });
+      setUserRoutes([...userRoutes, newRoute]);
+      setNewRouteName("");
+    } catch (err) {
+      setError("Nie udało się utworzyć nowej trasy");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleMovePoint = (index, direction) => {
+    const newList = [...userRouteList];
+    if (direction === "up" && index > 0) {
+      [newList[index], newList[index - 1]] = [
+        newList[index - 1],
+        newList[index],
+      ];
+    } else if (direction === "down" && index < newList.length - 1) {
+      [newList[index], newList[index + 1]] = [
+        newList[index + 1],
+        newList[index],
+      ];
+    }
+    setUserRouteList(newList);
+  };
+
+  const handleRemovePoint = (index) => {
+    const newList = userRouteList.filter((_, i) => i !== index);
+    setUserRouteList(newList);
+  };
+
   if (!isUserLogged) {
     return null;
   }
@@ -105,6 +165,27 @@ const RouteCard = ({ routeDetails, userRouteList, setUserRouteList }) => {
       </Card.Header>
 
       <Card.Body className="p-2">
+        {/* Dodawanie nowej trasy */}
+        <Form.Group className="mb-3">
+          <div className="d-flex">
+            <Form.Control
+              type="text"
+              placeholder="Nazwa nowej trasy"
+              value={newRouteName}
+              onChange={(e) => setNewRouteName(e.target.value)}
+            />
+            <Button
+              variant="light"
+              className="ms-2"
+              onClick={handleAddNewRoute}
+              disabled={isLoading}
+            >
+              Dodaj
+            </Button>
+          </div>
+        </Form.Group>
+
+        {/* Wybór istniejącej trasy */}
         <Form.Group className="mb-3">
           <Form.Select
             value={selectedRouteId || ""}
@@ -154,6 +235,31 @@ const RouteCard = ({ routeDetails, userRouteList, setUserRouteList }) => {
             <div className="d-flex align-items-center">
               <i className="bi bi-geo-alt me-2"></i>
               <span>{point.name}</span>
+            </div>
+            <div>
+              <Button
+                variant="link"
+                className="text-light p-1"
+                onClick={() => handleMovePoint(index, "up")}
+                disabled={index === 0}
+              >
+                <i className="bi bi-arrow-up"></i>
+              </Button>
+              <Button
+                variant="link"
+                className="text-light p-1"
+                onClick={() => handleMovePoint(index, "down")}
+                disabled={index === userRouteList.length - 1}
+              >
+                <i className="bi bi-arrow-down"></i>
+              </Button>
+              <Button
+                variant="link"
+                className="text-light p-1"
+                onClick={() => handleRemovePoint(index)}
+              >
+                <i className="bi bi-trash"></i>
+              </Button>
             </div>
           </ListGroup.Item>
         ))}

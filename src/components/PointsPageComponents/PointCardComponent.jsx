@@ -13,8 +13,12 @@ const PointCardComponent = ({ point }) => {
 
   const fetchFavoritePoints = async () => {
     if (isUserLogged && user?.id) {
-      const userData = await userService.getUserById(user.id);
-      setUserFavorite(userData.favoritePoints);
+      try {
+        const userData = await userService.getUserById(user.id);
+        setUserFavorite(userData.favoritePoints);
+      } catch (err) {
+        console.log(err);
+      }
     }
   };
 
@@ -89,7 +93,10 @@ const PointCardComponent = ({ point }) => {
               ) : (
                 <Button
                   variant="secondary"
-                  onClick={() => setUserFavorite((prev) => [...prev, point.id])}
+                  onClick={() => {
+                    console.log(userFavorite);
+                    setUserFavorite((prev) => [...prev, point.id]);
+                  }}
                 >
                   <i className="bi bi-heart"></i>
                 </Button>

@@ -10,9 +10,11 @@ import {
 } from "react-bootstrap";
 import { userService } from "../utils/api/userService";
 import { useAuth } from "../context/AuthProvider";
+import { Navigate, useNavigate } from "react-router-dom";
 
-const LoginPage = ({ loginUser }) => {
-  const { user, login, logout } = useAuth();
+const LoginPage = () => {
+  const { isUserLogged, login } = useAuth();
+  const navigate = useNavigate();
 
   const [status, setStatus] = useState({
     loading: false,
@@ -25,6 +27,12 @@ const LoginPage = ({ loginUser }) => {
     password: "",
     confirmPassword: "",
   });
+
+  useEffect(() => {
+    if (isUserLogged) {
+      navigate("/home");
+    }
+  }, [isUserLogged, navigate]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -39,6 +47,9 @@ const LoginPage = ({ loginUser }) => {
         alert("Hasła muszą być identyczne!");
         return;
       }
+      setTimeout(() => {
+        handlRegister();
+      }, 500);
     } else {
       setStatus({ ...status, status: "", loading: true });
       setTimeout(() => {
@@ -54,12 +65,33 @@ const LoginPage = ({ loginUser }) => {
       });
       if (response) {
         login(response[0]);
-        loginUser(); ///do zmian
         setStatus({ ...status, status: "success", loading: true });
-        // przekierowanie w App
       } else {
         setStatus({ ...status, status: "danger", loading: true });
         alert("Niepoprawne dane logowania!");
+      }
+    } catch (err) {
+      setStatus({ ...status, status: "danger", loading: true });
+      console.error("error", err);
+    } finally {
+      setTimeout(() => {
+        setStatus({ ...status, loading: false });
+      }, 2000);
+    }
+  };
+  const handlRegister = async () => {
+    try {
+      const response = await userService.register({
+        username: userDataQuery.email.split("@")[0],
+        email: userDataQuery.email,
+        password: userDataQuery.password,
+      });
+      if (response) {
+        login(response[0]);
+        setStatus({ ...status, status: "success", loading: true });
+      } else {
+        setStatus({ ...status, status: "danger", loading: true });
+        alert("Błąd!");
       }
     } catch (err) {
       setStatus({ ...status, status: "danger", loading: true });

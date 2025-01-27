@@ -13,7 +13,6 @@ import {
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import { pointsService } from "../utils/api/pointsService";
-import Paginator from "../components/PointsPageComponents/Paginator";
 import PointCardComponent from "../components/PointsPageComponents/PointCardComponent";
 import { category } from "../models/Category";
 
@@ -95,7 +94,9 @@ const PointsPage = ({ pois }) => {
             >
               <option value="">Wszystkie</option>
               {category.list.map((cat) => (
-                <option value={cat.id}>{cat.name}</option>
+                <option key={cat.id} value={cat.id}>
+                  {cat.name}
+                </option>
               ))}
             </Form.Select>
           </Form.Group>
@@ -136,7 +137,7 @@ const PointsPage = ({ pois }) => {
           </Col>
         ))}
       </Row>
-      {/* <Paginator pointsData={points} /> */}
+
       <Row>
         <Col>
           <Pagination className="justify-content-center mt-4">

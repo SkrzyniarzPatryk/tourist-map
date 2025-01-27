@@ -27,6 +27,11 @@ class PointsService extends BaseApi {
     return this.get<PointModel>(query);
   }
 
+  async getPointsByUserId(userId: string): Promise<PointModel[]> {
+    const query = `?userId=${userId}`;
+    return this.get<PointModel[]>(query);
+  }
+
   async addPoint(point: PointModel): Promise<PointModel> {
     point.rating = 0;
     point.reviews = 0;

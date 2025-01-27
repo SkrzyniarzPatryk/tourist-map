@@ -10,11 +10,21 @@ class CommentsService extends BaseApi {
     return this.get<any[]>(query);
   }
 
-  async addComment(comment: { pointId: string; userId: string; content: string; rating: number; createdAt: string; updatedAt: string }): Promise<any> {
-    return this.post<any>("", comment);
+  async getCommentsByUserId(userId: string): Promise<any[]> {
+    const query = `?userId=${userId}`;
+    return this.get<any[]>(query);
   }
 
-  
+  async addComment(comment: {
+    pointId: string;
+    userId: string;
+    content: string;
+    rating: number;
+    createdAt: string;
+    updatedAt: string;
+  }): Promise<any> {
+    return this.post<any>("", comment);
+  }
 }
 
 export const commentsService = new CommentsService();

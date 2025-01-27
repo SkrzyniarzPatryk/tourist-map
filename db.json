@@ -5,15 +5,13 @@
       "name": "Parafia Prawosławna",
       "description": "Świątynia znajdująca się przy ulicy Bodzentyńskiej, będąca jedyną cerkwią prawosławną w Kielcach. Budynek został wzniesiony w latach 1977-1982 w stylu współczesnym z elementami architektury bizantyjskiej. Wnętrze zdobi tradycyjny ikonostas oraz liczne ikony. Parafia prowadzi aktywną działalność duszpasterską i kulturalną, organizując koncerty muzyki cerkiewnej i spotkania międzywyznaniowe. Jest ważnym centrum życia duchowego prawosławnych mieszkańców regionu świętokrzyskiego.",
       "category": "5",
-      "position": [
-        50.871848299559176,
-        20.63844948247584
-      ],
+      "position": [50.871848299559176, 20.63844948247584],
       "images": [
         "https://lh3.googleusercontent.com/p/AF1QipP5QsWUodsdR5dtsAfHWcRIznILeCh45Og_pueZ=s1360-w1360-h1020",
         "https://lh3.googleusercontent.com/p/AF1QipPcrwng__FKc7mRYrgILTBid1K8ZAJ2FzjuE_aA=s1360-w1360-h1020"
       ],
       "reviews": 4,
+      "userId": "f09e",
       "rating": 4.8
     },
     {
@@ -21,16 +19,14 @@
       "name": "Politechnika Świętokrzyska",
       "description": "Największa uczelnia techniczna w regionie świętokrzyskim, założona w 1965 roku. Kampus uczelni znajduje się przy al. Tysiąclecia Państwa Polskiego i obejmuje nowoczesne budynki dydaktyczne, laboratoria oraz centrum sportowe. Uczelnia kształci studentów na pięciu wydziałach: Budownictwa i Architektury, Elektrotechniki, Automatyki i Informatyki, Mechatroniki i Budowy Maszyn, Inżynierii Środowiska, Geomatyki i Energetyki oraz Zarządzania i Modelowania Komputerowego. Politechnika posiada również nowoczesne Centrum Laserowych Technologii Metali oraz Centrum Naukowo-Wdrożeniowe.",
       "category": "6",
-      "position": [
-        50.87884392604276,
-        20.640082962655097
-      ],
+      "position": [50.87884392604276, 20.640082962655097],
       "images": [
         "https://tu.kielce.pl/wp-content/uploads/2021/03/psk-widok-2020.jpg",
         "https://tu.kielce.pl/wp-content/uploads/2018/06/rektorat-2015-2.jpg",
         "https://radiokielce.pl/wp-content/uploads/2023/03/IT_3372.jpg"
       ],
       "reviews": 3,
+      "userId": "f09e",
       "rating": 4.5
     },
     {
@@ -38,16 +34,14 @@
       "name": "Rezerwat Skalny Ślichowice",
       "description": "Wyjątkowy rezerwat przyrody nieożywionej znajdujący się w zachodniej części Kielc. Jest to dawny kamieniołom, gdzie można podziwiać unikatowy w skali europejskiej przykład fałdu obalonego w wapieniach dewońskich. Ściany kamieniołomu osiągają wysokość do 30 metrów. Rezerwat zajmuje powierzchnię 0,55 ha i jest podzielony na dwie części rozdzielone ulicą. Oprócz walorów geologicznych, miejsce to oferuje również ścieżkę edukacyjną z tablicami informacyjnymi oraz punkt widokowy, z którego rozpościera się panorama na okoliczne tereny.",
       "category": "3",
-      "position": [
-        50.886771479833776,
-        20.588036449591307
-      ],
+      "position": [50.886771479833776, 20.588036449591307],
       "images": [
         "https://mynaszlaku.pl/wp-content/uploads/2023/07/rezerwat-skalny-slichowice-kielce-0012.jpg",
         "https://mynaszlaku.pl/wp-content/uploads/2023/07/rezerwat-skalny-slichowice-kielce-0018.jpg",
         "https://tymrazem.pl/wp-content/uploads/2021/03/slich.jpg"
       ],
       "reviews": 3,
+      "userId": "f09e",
       "rating": 4.8
     },
     {
@@ -55,15 +49,13 @@
       "name": "Geonatura Kielce - Ogród Botaniczny",
       "description": "Nowoczesny kompleks botaniczny o powierzchni około 13 hektarów, otwarty w 2018 roku. Ogród podzielony jest na kilka stref tematycznych, w tym kolekcje roślin charakterystycznych dla Gór Świętokrzyskich, alpinarium oraz część parkową z fontannami. Na terenie ogrodu znajduje się również nowoczesne centrum edukacyjne, gdzie organizowane są warsztaty i zajęcia przyrodnicze. Szczególnie warte uwagi są: kolekcja roślin wodnych, różanarium oraz szklarnia z roślinami egzotycznymi. Ogród jest dostosowany do potrzeb osób niepełnosprawnych i wyposażony w ścieżki edukacyjne oraz miejsca odpoczynku.",
       "category": "3",
-      "position": [
-        50.86789338714975,
-        20.59837140758464
-      ],
+      "position": [50.86789338714975, 20.59837140758464],
       "images": [
         "https://d37rmf1ynyg9aw.cloudfront.net/fit-in/1280x1280/data/v4/resources/images/a88e44d1-c951-44d2-b8ed-95340adbdc14.JPG",
         "https://cdn.galleries.smcloud.net/t/galleries/gf-WdMJ-HJVs-sKoE_majowka-2024-w-ogrodzie-botanicznym-w-kielcach-1920x1080-nocrop.jpg"
       ],
       "reviews": 3,
+      "userId": "f09e",
       "rating": 2.7
     },
     {
@@ -71,14 +63,12 @@
       "name": "Jaskinia Raj",
       "description": "Jedna z najpiękniejszych jaskiń krasowych w Polsce, odkryta w 1963 roku. Słynie z bogatej szaty naciekowej, w tym unikatowych stalaktytów, stalagmitów i kolumn. W jaskini odkryto również ślady pobytu człowieka neandertalskiego. Trasa turystyczna ma długość 180 metrów i jest świetnie przystosowana do zwiedzania. Przed wejściem znajduje się pawilon muzealny z ekspozycją archeologiczną.",
       "category": "3",
-      "position": [
-        "50.82533880016709",
-        "20.49972396827529"
-      ],
+      "position": ["50.82533880016709", "20.49972396827529"],
       "images": [
         "https://swietokrzyskie.travel/media/cache/_1920_1080/uploads/5ee09b416b563.jpg",
         "https://hoteljodelka.pl/lib/lgpoqd/jaskinia-la9sep5g.jpg"
       ],
+      "userId": "f09e",
       "rating": 4.5,
       "reviews": 2
     },
@@ -87,15 +77,13 @@
       "name": "Zamek w Chęcinach",
       "description": "Monumentalne ruiny zamku królewskiego z XIII wieku, górujące nad okolicą. Twierdza pełniła kiedyś funkcje skarbca koronnego i więzienia stanu. Po gruntownej renowacji udostępniono do zwiedzania dwie wieże, skarbiec oraz lochy. Z murów zamku rozpościera się przepiękna panorama na Góry Świętokrzyskie. Organizowane są tu liczne wydarzenia historyczne i kulturalne.",
       "category": "1",
-      "position": [
-        "50.79770277202022",
-        "20.45968558396305"
-      ],
+      "position": ["50.79770277202022", "20.45968558396305"],
       "images": [
         "https://slowroad.pl/wp-content/uploads/sites/23/2021/04/zamek-w-checinach06.jpg",
         "https://geopark.pl/wp-content/uploads/2021/10/image-5-scaled.jpeg",
         "https://swietokrzyskie-przewodnik.pl/wp-content/uploads/2022/12/zamek-checiny-przewodnik-wycieczki-swietokrzyskie-scaled-e1649539969283.jpeg"
       ],
+      "userId": "f09e",
       "rating": 4.7,
       "reviews": 2
     },
@@ -104,15 +92,13 @@
       "name": "Święty Krzyż",
       "description": "Najstarsze polskie sanktuarium z relikwiami Drzewa Krzyża Świętego, położone na szczycie Łysej Góry (595 m n.p.m.). Kompleks obejmuje dawne opactwo benedyktyńskie, kościół oraz Muzeum Przyrodnicze Świętokrzyskiego Parku Narodowego. Z wieży klasztornej rozciąga się panorama na całe pasmo Gór Świętokrzyskich.",
       "category": "5",
-      "position": [
-        "50.85962617008112",
-        "21.05325106697621"
-      ],
+      "position": ["50.85962617008112", "21.05325106697621"],
       "images": [
         "https://www.swietykrzyz.pl/zdjecia/zdjecia_duze/kol-7.jpg",
         "https://oblaci.pl/wp-content/uploads/2021/10/1-3.jpg",
         "https://przewodnik-swietokrzyskie.pl/wp-content/uploads/2016/01/%C5%9Awi%C4%99ty-Krzy%C5%BC-z-Przewodnikiem-1.jpg"
       ],
+      "userId": "f09e",
       "rating": 4.6,
       "reviews": 2
     },
@@ -121,15 +107,13 @@
       "name": "Kadzielnia",
       "description": "Rezerwat przyrody nieożywionej w centrum Kielc, obejmujący dawny kamieniołom. Główną atrakcją jest amfiteatr na 5000 miejsc oraz system jaskiń udostępnionych do zwiedzania. Na terenie rezerwatu znajdują się ścieżki edukacyjne, punkty widokowe oraz geologiczna ścieżka dydaktyczna. Miejsce to jest popularne zarówno wśród turystów, jak i mieszkańców Kielc.",
       "category": "3",
-      "position": [
-        "50.8616033403056",
-        "20.617370121795776"
-      ],
+      "position": ["50.8616033403056", "20.617370121795776"],
       "images": [
         "https://rajdladzieci.kielce.eu/uploads/hbaners/aa29ef6cbb6872ab4deeb3b60ccb54a3.jpg",
         "https://kadzielniakielce.pl/wp-content/uploads/2020/03/rezerwat-kadzielnia-kielce-1.jpg",
         "https://mynaszlaku.pl/wp-content/uploads/2019/09/kadzielnia-poranek.jpg"
       ],
+      "userId": "f09e",
       "rating": 4.4,
       "reviews": 2
     },
@@ -138,15 +122,13 @@
       "name": "Pałac Biskupów Krakowskich - Muzeum Narodowe w Kielcach",
       "description": "Jeden z najlepiej zachowanych zabytków architektury pałacowej z XVII wieku w Polsce. Dawna rezydencja biskupów krakowskich obecnie mieści główną siedzibę Muzeum Narodowego w Kielcach. W pałacu można podziwiać oryginalne wnętrza z epoki, cenne kolekcje malarstwa polskiego i europejskiego oraz wystaw czasowych. Szczególnie warte uwagi są Sanktuarium Marszałka Józefa Piłsudskiego oraz apartamenty biskupie z oryginalnym wystrojem. Przed pałacem znajduje się piękny ogród włoski.",
       "category": "1",
-      "position": [
-        "50.86922756042207",
-        "20.627433826294915"
-      ],
+      "position": ["50.86922756042207", "20.627433826294915"],
       "images": [
         "https://lh3.googleusercontent.com/p/AF1QipObpnO2kuGql0yiju0H_EKYdj0wV5AiCy4LAUKH=s1360-w1360-h1020",
         "https://lh3.googleusercontent.com/p/AF1QipOHbXNvtBA02cOBRaLK97EOibH-JQBgPplC7T1B=s1360-w1360-h1020",
         "https://lh3.googleusercontent.com/p/AF1QipMDQjG9Ufia9qWNfBO6SDEBkvtW0QifuIf1tjv5=s1360-w1360-h1020"
       ],
+      "userId": "f09e",
       "rating": 4.8,
       "reviews": 2
     },
@@ -155,15 +137,13 @@
       "name": "Rezerwat Karczówka",
       "description": "Malownicze wzgórze (340 m n.p.m.) w zachodniej części Kielc, na którym znajduje się zabytkowy klasztor pobernardyński z XVII wieku. Miejsce to łączy walory przyrodnicze z historycznymi - oprócz zabytkowego kompleksu klasztornego można tu podziwiać pozostałości dawnego górnictwa kruszcowego oraz chronione gatunki roślin. Z wzgórza rozpościera się piękna panorama Kielc. Teren rezerwatu przecinają ścieżki spacerowe i edukacyjne, co czyni go popularnym miejscem rekreacji mieszkańców miasta. W klasztorze znajduje się również słynna figura św. Barbary wykonana z bryły galeny (rudy ołowiu) wydobytej w XVII wieku.",
       "category": "3",
-      "position": [
-        "50.867480108078915",
-        "20.58772576862281"
-      ],
+      "position": ["50.867480108078915", "20.58772576862281"],
       "images": [
         "https://swietokrzyskie.pl/wp-content/uploads/2018/12/Karczowka-w-Kielcach-z-lotu-ptaka-fot-Andrzej-Paszkowski-swietokrzyskie_pl.jpg",
         "https://emkielce.pl/media/k2/items/cache/90c0e295a997506b5b0aa2cf5c8b7eeb_XL.jpg",
         "https://swietokrzyskie.travel/uploads/6438044074563.JPG"
       ],
+      "userId": "f09e",
       "rating": 4.3,
       "reviews": 2
     },
@@ -172,15 +152,13 @@
       "name": "Park Miejski im. Stanisława Staszica",
       "description": "Jeden z najstarszych parków miejskich w Polsce, założony w 1830 roku. Zajmuje powierzchnię około 8 hektarów w samym centrum Kielc. Park charakteryzuje się bogatym drzewostanem, w tym pomnikami przyrody, oraz zabytkowymi elementami małej architektury. Posiada urokliwe alejki, staw z fontanną, plac zabaw dla dzieci oraz zabytkową muszlę koncertową. Jest popularnym miejscem odpoczynku i rekreacji, gdzie organizowane są różne wydarzenia kulturalne i koncerty.",
       "category": "3",
-      "position": [
-        "50.86919032691766",
-        "20.6248122816173"
-      ],
+      "position": ["50.86919032691766", "20.6248122816173"],
       "images": [
         "https://swietokrzyskie.szlaki.pttk.pl/media/photos/2531/original.jpg",
         "https://familyfunspace.com/rails/active_storage/representations/proxy/eyJfcmFpbHMiOnsiZGF0YSI6MjA4NDE1LCJwdXIiOiJibG9iX2lkIn19--c536d031e0459796f44b7c564c6322ce51263136/eyJfcmFpbHMiOnsiZGF0YSI6eyJmb3JtYXQiOiJqcGciLCJyZXNpemUiOiIxMDAweDEwMDAifSwicHVyIjoidmFyaWF0aW9uIn19--9e979b794c9bc08a4ea31faea435103af8b16be4/photo.jpg",
         "https://radiokielce.pl/wp-content/uploads/2023/04/IMG_9505.jpg"
       ],
+      "userId": "f09e",
       "rating": 4.6,
       "reviews": 3
     },
@@ -189,15 +167,13 @@
       "name": "Teatr im. Stefana Żeromskiego",
       "description": "Główna scena teatralna Kielc, działająca nieprzerwanie od 1879 roku. Mieści się w zabytkowym budynku z charakterystyczną architekturą końca XIX wieku. Teatr słynie z ambitnego repertuaru, łączącego klasykę z nowoczesnymi interpretacjami. Posiada dwie sceny: główną i kameralną. Organizuje również festiwale teatralne i wydarzenia kulturalne. Wnętrze zachwyca historycznymi detalami i oryginalnym wystrojem.",
       "category": "4",
-      "position": [
-        "50.87112672433791",
-        "20.628975550844096"
-      ],
+      "position": ["50.87112672433791", "20.628975550844096"],
       "images": [
         "https://pliki.propertydesign.pl/i/05/40/91/054091_r0_1140.jpg",
         "https://kielce.atrakcje.pl/zdjecia/atrakcje/2696/11829/1920x380/1/photo_190802122825_20.jpg",
         "https://www.konferencje.pl/media/cache/resolve/slideshow_v2/4/1/9/d/419d74e98f3d002855d4a72175d92c3d.jpg"
       ],
+      "userId": "f09e",
       "rating": 4.6,
       "reviews": 4
     }
@@ -531,12 +507,53 @@
       "email": "john@wp.pl",
       "password": "1234",
       "role": "admin",
-      "points": [
-        1,
-        2
-      ],
-      "favoritePoints": [
-        "4"
+      "points": [1, 2],
+      "favoritePoints": ["3", "6", "5", "1"]
+    },
+    {
+      "id": "c1ba",
+      "username": "patryk12332123",
+      "email": "patryk12332123@gmail.com",
+      "password": "12"
+    }
+  ],
+  "userroutes": [
+    {
+      "id": "2235",
+      "name": "asd",
+      "userId": "f09e",
+      "routeList": [
+        {
+          "name": "Politechnika Świętokrzyska",
+          "position": [50.87884392604276, 20.640082962655097]
+        },
+        {
+          "name": "Parafia Prawosławna",
+          "position": [50.871848299559176, 20.63844948247584]
+        },
+        {
+          "name": "Parafia Prawosławna",
+          "position": [50.871848299559176, 20.63844948247584]
+        }
+      ]
+    },
+    {
+      "id": "e8c5",
+      "name": "Szkola i rozrywka",
+      "userId": "f09e",
+      "routeList": [
+        {
+          "name": "Teatr im. Stefana Żeromskiego",
+          "position": ["50.87112672433791", "20.628975550844096"]
+        },
+        {
+          "name": "Politechnika Świętokrzyska",
+          "position": [50.87884392604276, 20.640082962655097]
+        },
+        {
+          "name": "Parafia Prawosławna",
+          "position": [50.871848299559176, 20.63844948247584]
+        }
       ]
     }
   ]

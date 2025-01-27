@@ -9,7 +9,9 @@ class UserService extends BaseApi {
     let response = await this.get<any>(query);
     return response.length == 1 ? response : false;
   }
-  async register(email: string, password: string): Promise<any> {}
+  async register(data: any): Promise<any> {
+    return this.post<any>("/", data);
+  }
 
   async updateProfile(id: string, data: any): Promise<any> {
     return this.patch<any>(`/${id}`, data);
