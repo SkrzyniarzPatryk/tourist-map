@@ -23,6 +23,7 @@ import PointCardComponent from "./PointsPageComponents/PointCardComponent";
 import AddPointModal from "./MapPage/AddPointModal";
 import { Control } from "leaflet";
 import { Card, ListGroup } from "react-bootstrap";
+import { BsMap, BsGeoAlt, BsX, BsArrowUp, BsArrowDown } from "react-icons/bs";
 import RouteCard from "./MapPage/RouteCard";
 
 const MapComponent = () => {
@@ -57,7 +58,11 @@ const MapComponent = () => {
   const ClickMapHandler = () => {
     useMapEvents({
       click: (e) => {
-        setClickedPoint(e.latlng);
+        setClickedPoint(null);
+        setContextMenuPosition(null);
+      },
+      drag: (e) => {
+        setClickedPoint(null);
         setContextMenuPosition(null);
       },
       contextmenu: (e) => {
@@ -84,12 +89,12 @@ const MapComponent = () => {
           <i className="bi bi-plus-circle"></i> Dodaj punkt!
         </Dropdown.Item>
         <Dropdown.Divider />
-        <Dropdown.Item eventKey="2">
+        {/* <Dropdown.Item eventKey="2">
           <i className="bi bi-zoom-in"></i> Zbliż
         </Dropdown.Item>
         <Dropdown.Item eventKey="3">
           <i className="bi bi-zoom-out"></i> Oddal
-        </Dropdown.Item>
+        </Dropdown.Item> */}
       </Dropdown.Menu>
     );
   };
@@ -113,7 +118,19 @@ const MapComponent = () => {
             }}
           >
             <div className="d-flex justify-content-between align-items-center mb-3">
-              <Button variant="primary" className="me-2">
+              <Button
+                variant="primary"
+                className="me-2"
+                onClick={() => {
+                  setUserRouteList([
+                    ...userRouteList,
+                    {
+                      name: selectedPoint.name,
+                      position: selectedPoint.position,
+                    },
+                  ]);
+                }}
+              >
                 <i className="bi bi-plus-circle-fill"> Dodaj do trasy</i>
               </Button>
               <Button
@@ -192,7 +209,7 @@ const MapComponent = () => {
         style={{ height: "calc(-143px + 100vh)", width: "100%" }}
       >
         <ScaleControl imperial={false} />
-        <ZoomControl position="topright" />
+        <ZoomControl position="bottomleft" />
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreeeeeetMap</a> contributors'
@@ -221,7 +238,7 @@ const MapComponent = () => {
           </Marker>
         ))}
         //Ruting
-        <Routing points={points} onRouteFound={handleRouteFound} />
+        <Routing points={userRouteList} onRouteFound={handleRouteFound} />
         <RouteCard
           setUserRouteList={setUserRouteList}
           userRouteList={userRouteList}

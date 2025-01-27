@@ -86,10 +86,10 @@ function Root() {
                       align="end"
                       style={{ color: "#fff" }}
                     >
-                      <NavDropdown.Item as={Link} to="#profile">
+                      <NavDropdown.Item as={Link} to="user-profile">
                         Profil
                       </NavDropdown.Item>
-                      <NavDropdown.Item as={Link} to="#settings">
+                      <NavDropdown.Item as={Link} to="user-profile">
                         Ustawienia
                       </NavDropdown.Item>
                       <NavDropdown.Divider />
@@ -128,23 +128,16 @@ function Root() {
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link to="/" className="nav-link px-2 text-body-secondary">
-                    Strona Główna
+                  <Link to="/map" className="nav-link px-2 text-body-secondary">
+                    Mapa interaktywna
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link to="/" className="nav-link px-2 text-body-secondary">
-                    Strona Główna
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link to="/" className="nav-link px-2 text-body-secondary">
-                    Strona Główna
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link to="/" className="nav-link px-2 text-body-secondary">
-                    Strona Główna
+                  <Link
+                    to="/points"
+                    className="nav-link px-2 text-body-secondary"
+                  >
+                    Punkty
                   </Link>
                 </li>
               </ul>
@@ -158,28 +151,6 @@ function Root() {
                 />{" "}
                 © {new Date().getFullYear()} Wszelkie prawa zastrzeżone.
               </p>
-              {/* <Col md={6} className="text-center text-md-start">
-                <p>
-                  © {new Date().getFullYear()} Moja Strona. Wszelkie prawa
-                  zastrzeżone.
-                </p>
-              </Col>
-              <Col md={6} className="text-center text-md-end">
-                <ul className="list-inline">
-                  <li className="list-inline-item">
-                    <Link to="/">Strona Główna</Link>
-                  </li>
-                  <li className="list-inline-item">
-                    <Link to="/about">O Nas</Link>
-                  </li>
-                  <li className="list-inline-item">
-                    <Link to="/contact">Kontakt</Link>
-                  </li>
-                  <li className="list-inline-item">
-                    <Link to="/privacy">Polityka Prywatności</Link>
-                  </li>
-                </ul>
-              </Col> */}
             </Row>
           </Container>
         </footer>

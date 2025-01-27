@@ -12,40 +12,14 @@ const PointCardComponent = ({ point }) => {
   const [userFavorite, setUserFavorite] = useState([]);
 
   const fetchFavoritePoints = async () => {
-    try {
-      if (isUserLogged && user?.id) {
+    if (isUserLogged && user?.id) {
+      try {
         const userData = await userService.getUserById(user.id);
-        setUserFavorite(userData.favoritePoints || []);
+        setUserFavorite(userData.favoritePoints);
+      } catch (err) {
+        console.log(err);
       }
-    } catch (error) {
-      console.error("Błąd przy pobieraniu ulubionych punktów:", error);
     }
-  };
-
-  const syncFavoritesWithDB = async (updatedFavorites) => {
-    try {
-      await userService.updateProfile(user.id, {
-        favoritePoints: updatedFavorites,
-      });
-    } catch (error) {
-      console.error("Błąd podczas synchronizacji ulubionych z bazą danych:", error);
-    }
-  };
-
-  const addToFavorites = async (pointId) => {
-    setUserFavorite((prev) => {
-      const updatedFavorites = [...prev, pointId];
-      syncFavoritesWithDB(updatedFavorites);
-      return updatedFavorites;
-    });
-  };
-
-  const removeFromFavorites = async (pointId) => {
-    setUserFavorite((prev) => {
-      const updatedFavorites = prev.filter((id) => id !== pointId);
-      syncFavoritesWithDB(updatedFavorites);
-      return updatedFavorites;
-    });
   };
 
   useEffect(() => {
@@ -106,7 +80,10 @@ const PointCardComponent = ({ point }) => {
               ) : (
                 <Button
                   variant="secondary"
-                  onClick={() => addToFavorites(point.id)}
+                  onClick={() => {
+                    console.log(userFavorite);
+                    setUserFavorite((prev) => [...prev, point.id]);
+                  }}
                 >
                   <i className="bi bi-heart"></i>
                 </Button>

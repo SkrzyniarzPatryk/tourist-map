@@ -15,34 +15,19 @@ import MapPage from "./pages/MapPage";
 import LoginPage from "./pages/LoginPage";
 import PointsPage from "./pages/PointsPage";
 import HomePage from "./pages/HomePage";
-import { useEffect, useState } from "react";
-import { Nav } from "react-bootstrap";
-import { AuthProvider } from "./context/AuthProvider";
+import { AuthProvider, useAuth } from "./context/AuthProvider";
 import PointDetailPage from "./pages/PointDetailPage";
+import UserProfile from "./pages/UserProfile";
 import UserPoints from "./pages/UserPoints";
 
 const pointsOfInterest = [];
 const tmp = true;
 
 function App() {
-  const [isUserLogged, setIsUserLogged] = useState(false);
-  const loginUser = () => {
-    setIsUserLogged(true);
-  };
-  const logoutUser = () => {
-    setIsUserLogged(false);
-  };
-
-  // useEffect(() => {
-  //   <Navigate to="/home" />;
-  // }, [isUserLogged]);
-
   const router = createBrowserRouter([
     {
       path: "/",
-      element: (
-        <NavBarLayout isUserLogged={isUserLogged} logoutUser={logoutUser} />
-      ),
+      element: <NavBarLayout />,
       errorElement: <ErrorPage />,
       children: [
         {
@@ -55,11 +40,15 @@ function App() {
         },
         {
           path: "map",
-          element: <MapPage pointsOfInterest={pointsOfInterest} />,
+          element: <MapPage />,
+        },
+        {
+          path: "user-profile",
+          element: <UserProfile />,
         },
         {
           path: "points",
-          element: <PointsPage points={pointsOfInterest} />,
+          element: <PointsPage />,
         },
         {
           path: "point/:id",
@@ -73,11 +62,7 @@ function App() {
     },
     {
       path: "/login",
-      element: isUserLogged ? (
-        <Navigate to="/home" />
-      ) : (
-        <LoginPage loginUser={loginUser} />
-      ),
+      element: <LoginPage />,
     },
   ]);
 

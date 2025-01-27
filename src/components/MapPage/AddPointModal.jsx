@@ -8,8 +8,10 @@ import SelectImagesModal from "./SelectImagesModal";
 import { pointsService } from "../../utils/api/pointsService";
 import { formToJSON } from "axios";
 import { category } from "../../models/Category";
+import { useAuth } from "../../context/AuthProvider";
 
 const AddPointModal = ({ showModal, handleCloseModal, pointPosition }) => {
+  const { user, isUserLogged } = useAuth();
   const {
     register,
     handleSubmit,
@@ -20,12 +22,17 @@ const AddPointModal = ({ showModal, handleCloseModal, pointPosition }) => {
   const [showImageModal, setShowImageModal] = useState(false);
 
   const onSubmit = async (data) => {
+    if (!isUserLogged) {
+      alert("Musisz być zalogowany, aby dodać punkt");
+      return;
+    }
     let formatedData = {
       name: data.name,
       description: data.description,
       category: data.category,
       position: [data.lat, data.lng],
       images: selectedImages,
+      userId: user.id,
     };
 
     try {
@@ -75,7 +82,9 @@ const AddPointModal = ({ showModal, handleCloseModal, pointPosition }) => {
               isInvalid={!!errors.category}
             >
               {category.list.map((cat) => (
-                <option value={cat.id}>{cat.name}</option>
+                <option key={cat.id} value={cat.id}>
+                  {cat.name}
+                </option>
               ))}
             </Form.Select>
             <Form.Control.Feedback type="invalid">
