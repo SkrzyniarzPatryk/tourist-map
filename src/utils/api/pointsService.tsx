@@ -32,7 +32,7 @@ class PointsService extends BaseApi {
     point.reviews = 0;
     return this.post<PointModel>("", point);
   }
-
+  
   async updatePointRating(
     pointId: string,
     newRating: number,

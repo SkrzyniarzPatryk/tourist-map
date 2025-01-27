@@ -200,7 +200,7 @@
       ],
       "rating": 4.6,
       "reviews": 4
-    }
+    },
   ],
   "comments": [
     {
@@ -531,12 +531,10 @@
       "email": "john@wp.pl",
       "password": "1234",
       "role": "admin",
-      "points": [
-        1,
-        2
-      ],
       "favoritePoints": [
-        "4"
+        "5",
+        "2",
+        "6"
       ]
     }
   ]

@@ -23,7 +23,6 @@ import PointCardComponent from "./PointsPageComponents/PointCardComponent";
 import AddPointModal from "./MapPage/AddPointModal";
 import { Control } from "leaflet";
 import { Card, ListGroup } from "react-bootstrap";
-import { BsMap, BsGeoAlt, BsX, BsArrowUp, BsArrowDown } from "react-icons/bs";
 import RouteCard from "./MapPage/RouteCard";
 
 const MapComponent = () => {

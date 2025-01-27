@@ -44,7 +44,7 @@ function Root() {
                   Punkty
                 </Nav.Link>
                 <NavDropdown title="Konto użytkownika" id="basic-nav-dropdown">
-                  <NavDropdown.Item as={Link} to="#action/3.1">
+                  <NavDropdown.Item as={Link} to="user-points">
                     Moje punkty
                   </NavDropdown.Item>
                   <NavDropdown.Item as={Link} to="#action/3.2">

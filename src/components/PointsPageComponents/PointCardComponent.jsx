@@ -12,24 +12,45 @@ const PointCardComponent = ({ point }) => {
   const [userFavorite, setUserFavorite] = useState([]);
 
   const fetchFavoritePoints = async () => {
-    if (isUserLogged && user?.id) {
-      const userData = await userService.getUserById(user.id);
-      setUserFavorite(userData.favoritePoints);
+    try {
+      if (isUserLogged && user?.id) {
+        const userData = await userService.getUserById(user.id);
+        setUserFavorite(userData.favoritePoints || []);
+      }
+    } catch (error) {
+      console.error("Błąd przy pobieraniu ulubionych punktów:", error);
     }
+  };
+
+  const syncFavoritesWithDB = async (updatedFavorites) => {
+    try {
+      await userService.updateProfile(user.id, {
+        favoritePoints: updatedFavorites,
+      });
+    } catch (error) {
+      console.error("Błąd podczas synchronizacji ulubionych z bazą danych:", error);
+    }
+  };
+
+  const addToFavorites = async (pointId) => {
+    setUserFavorite((prev) => {
+      const updatedFavorites = [...prev, pointId];
+      syncFavoritesWithDB(updatedFavorites);
+      return updatedFavorites;
+    });
+  };
+
+  const removeFromFavorites = async (pointId) => {
+    setUserFavorite((prev) => {
+      const updatedFavorites = prev.filter((id) => id !== pointId);
+      syncFavoritesWithDB(updatedFavorites);
+      return updatedFavorites;
+    });
   };
 
   useEffect(() => {
     fetchFavoritePoints();
-  }, []);
-
-  useEffect(() => {
-    console.log(userFavorite);
-    if (user?.id && userFavorite.length > 0) {
-      userService.updateProfile(user.id, {
-        favoritePoints: userFavorite,
-      });
-    }
-  }, [userFavorite]);
+  }, [isUserLogged, user?.id]);
 
   return (
     <Card className="h-100 text-white bg-dark border-secondary">
@@ -78,18 +99,14 @@ const PointCardComponent = ({ point }) => {
               {userFavorite.includes(point.id) ? (
                 <Button
                   variant="secondary"
-                  onClick={() =>
-                    setUserFavorite((prev) =>
-                      prev.filter((id) => id !== point.id),
-                    )
-                  }
+                  onClick={() => removeFromFavorites(point.id)}
                 >
                   <i className="bi bi-heart-fill"></i>
                 </Button>
               ) : (
                 <Button
                   variant="secondary"
-                  onClick={() => setUserFavorite((prev) => [...prev, point.id])}
+                  onClick={() => addToFavorites(point.id)}
                 >
                   <i className="bi bi-heart"></i>
                 </Button>

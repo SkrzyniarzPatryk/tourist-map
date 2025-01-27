@@ -36,6 +36,7 @@ export const AuthProvider = ({ children }) => {
       {children}
     </AuthContext.Provider>
   );
+  
 };
 
 export const useAuth = () => {
@@ -45,3 +46,4 @@ export const useAuth = () => {
   }
   return context;
 };
+

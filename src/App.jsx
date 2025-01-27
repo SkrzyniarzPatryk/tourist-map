@@ -19,6 +19,7 @@ import { useEffect, useState } from "react";
 import { Nav } from "react-bootstrap";
 import { AuthProvider } from "./context/AuthProvider";
 import PointDetailPage from "./pages/PointDetailPage";
+import UserPoints from "./pages/UserPoints";
 
 const pointsOfInterest = [];
 const tmp = true;
@@ -64,6 +65,10 @@ function App() {
           path: "point/:id",
           element: <PointDetailPage />,
         },
+        {
+          path: "user-points",
+          element: <UserPoints/>,
+        }
       ],
     },
     {
