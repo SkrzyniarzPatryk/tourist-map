@@ -53,7 +53,7 @@ const LoginPage = ({ loginUser }) => {
         password: userDataQuery.password,
       });
       if (response) {
-        login(response);
+        login(response[0]);
         loginUser(); ///do zmian
         setStatus({ ...status, status: "success", loading: true });
         // przekierowanie w App
@@ -65,7 +65,6 @@ const LoginPage = ({ loginUser }) => {
       setStatus({ ...status, status: "danger", loading: true });
       console.error("error", err);
     } finally {
-      login(true);
       setTimeout(() => {
         setStatus({ ...status, loading: false });
       }, 2000);

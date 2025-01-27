@@ -14,15 +14,19 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import "leaflet/dist/leaflet.css";
 //import L from 'leaflet';
 //import 'leaflet-routing-machine';
-// import Routing from "../utils/MapRouting";
+import Routing from "../utils/MapRouting";
 import { pointsService } from "../utils/api/pointsService";
 import marker1 from "../assets/markers/location-pin-1.png";
 import marker2 from "../assets/markers/location-pin-2.png";
 import marker3 from "../assets/markers/small-location-pin.png";
 import PointCardComponent from "./PointsPageComponents/PointCardComponent";
 import AddPointModal from "./MapPage/AddPointModal";
+import { Control } from "leaflet";
+import { Card, ListGroup } from "react-bootstrap";
+import { BsMap, BsGeoAlt, BsX, BsArrowUp, BsArrowDown } from "react-icons/bs";
+import RouteCard from "./MapPage/RouteCard";
 
-const MapComponent = ({ pointss }) => {
+const MapComponent = () => {
   const [points, setPoints] = useState([]);
   const [fetchingStatus, setFetchingStatus] = useState({
     loading: true,
@@ -32,6 +36,9 @@ const MapComponent = ({ pointss }) => {
   const [clickedPoint, setClickedPoint] = useState(null);
   const [contextMenuPosition, setContextMenuPosition] = useState(null);
   const [showModal, setShowModal] = useState(false);
+
+  const [userRouteList, setUserRouteList] = useState([]);
+  const [routeDetails, setRouteDetails] = useState({ distance: 0, time: 0 });
 
   const fetchPoints = async () => {
     try {
@@ -142,6 +149,16 @@ const MapComponent = ({ pointss }) => {
     iconAnchor: [16, 32],
   });
 
+  //Ruting
+  const handleRouteFound = (details) => {
+    setRouteDetails({
+      distance: details.summary.totalDistance / 1000,
+      time: details.summary.totalTime / 60,
+    });
+  };
+  useEffect(() => {
+    console.log(routeDetails);
+  }, [routeDetails]);
   if (fetchingStatus.loading) {
     return (
       <div
@@ -177,7 +194,6 @@ const MapComponent = ({ pointss }) => {
       >
         <ScaleControl imperial={false} />
         <ZoomControl position="topright" />
-
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreeeeeetMap</a> contributors'
@@ -186,7 +202,6 @@ const MapComponent = ({ pointss }) => {
         {clickedPoint && (
           <Marker position={clickedPoint} icon={clickedIcon}></Marker>
         )}
-
         {points.map((point, index) => (
           <Marker
             key={index}
@@ -206,7 +221,13 @@ const MapComponent = ({ pointss }) => {
             </Popup> */}
           </Marker>
         ))}
-        {/* <Routing points={points} /> */}
+        //Ruting
+        <Routing points={points} onRouteFound={handleRouteFound} />
+        <RouteCard
+          setUserRouteList={setUserRouteList}
+          userRouteList={userRouteList}
+          routeDetails={routeDetails}
+        />
       </MapContainer>
     </>
   );

@@ -17,7 +17,7 @@ class CommentsService extends BaseApi {
   // "content": "Bardzo fajne miejsce",
   // "rating": 5
   async addComment(commentModel: any) {
-    return await this.post<any>("", commentModel);
+    return await this.post<any>("/", commentModel);
   }
 
   async removeComment(id: string) {
