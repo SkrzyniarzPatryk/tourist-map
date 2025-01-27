@@ -1,3 +1,15 @@
+export interface PointModel {
+  id: string;
+  name: string;
+  description: string;
+  category: string;
+  position: [number, number];
+  images: string[];
+  rating: number;
+  reviews: number; // liczba recenzji
+}
+
+// pointsService.ts
 import { PointModel } from "../../models/pointModel";
 import { BaseApi } from "./baseApi";
 
@@ -15,17 +27,24 @@ class PointsService extends BaseApi {
       "?_page=" + paginatedQuery.page + "&_per_page=" + paginatedQuery.pageSize;
     return this.get<PointModel[]>(query);
   }
+
   async getPointById(id: number): Promise<PointModel> {
     let query = "?id=" + id;
     return this.get<PointModel>(query);
   }
-  
 
   async addPoint(point: PointModel): Promise<PointModel> {
     point.rating = 0;
     point.reviews = 0;
     return this.post<PointModel>("", point);
   }
-  
+
+  async updatePointRating(pointId: string, newRating: number, reviewsCount: number): Promise<PointModel> {
+    return this.patch<PointModel>(`/${pointId}`, {
+      rating: newRating,
+      reviews: reviewsCount
+    });
+  }
 }
+
 export const pointsService = new PointsService();
