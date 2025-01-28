@@ -15,29 +15,13 @@ import MapPage from "./pages/MapPage";
 import LoginPage from "./pages/LoginPage";
 import PointsPage from "./pages/PointsPage";
 import HomePage from "./pages/HomePage";
+import { AuthProvider, useAuth } from "./context/AuthProvider";
+import PointDetailPage from "./pages/PointDetailPage";
+import UserProfile from "./pages/UserProfile";
+import UserPoints from "./pages/UserPoints";
 
-const pointsOfInterest = [
-  {
-    name: "Parafia Prawosławna",
-    position: [50.871848299559176, 20.63844948247584],
-    description: "Parafia Prawosławna p.w. Św. Mikołaja.",
-  },
-  {
-    name: "Politechnika Świętokrzyska",
-    position: [50.87884392604276, 20.640082962655097],
-    description: "Idealne miejsce na nauke.",
-  },
-  {
-    name: "Rezerwat Skalny Ślichowice",
-    position: [50.886771479833776, 20.588036449591307],
-    description: "Idealne miejsce na spacer.",
-  },
-  {
-    name: "Geonatura Kielce - Ogród Botaniczny",
-    position: [50.86789338714975, 20.59837140758464],
-    description: "Idealne miejsce na spacer.",
-  },
-];
+const pointsOfInterest = [];
+const tmp = true;
 
 function App() {
   const router = createBrowserRouter([
@@ -46,22 +30,34 @@ function App() {
       element: <NavBarLayout />,
       errorElement: <ErrorPage />,
       children: [
-        // {
-        //   path: '/',
-        //   element: <Navigate to="/home" replace />,
-        // },
+        {
+          path: "/",
+          element: <Navigate to="/home" replace />,
+        },
         {
           path: "home",
           element: <HomePage />,
         },
         {
           path: "map",
-          element: <MapPage pointsOfInterest={pointsOfInterest} />,
+          element: <MapPage />,
+        },
+        {
+          path: "user-profile",
+          element: <UserProfile />,
         },
         {
           path: "points",
-          element: <PointsPage points={pointsOfInterest} />,
+          element: <PointsPage />,
         },
+        {
+          path: "point/:id",
+          element: <PointDetailPage />,
+        },
+        {
+          path: "user-points",
+          element: <UserPoints/>,
+        }
       ],
     },
     {
@@ -72,7 +68,9 @@ function App() {
 
   return (
     <div className="App">
-      <RouterProvider router={router} />
+      <AuthProvider>
+        <RouterProvider router={router} />
+      </AuthProvider>
     </div>
   );
 }
