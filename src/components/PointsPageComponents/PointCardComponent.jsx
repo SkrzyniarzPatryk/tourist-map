@@ -12,7 +12,6 @@ const PointCardComponent = ({ point }) => {
   const [userFavorite, setUserFavorite] = useState([]);
 
   const fetchFavoritePoints = async () => {
-    conso;
     if (isUserLogged && user?.id) {
       try {
         const userData = await userService.getUserById(user.id);

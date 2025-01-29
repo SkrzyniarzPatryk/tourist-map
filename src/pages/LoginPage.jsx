@@ -5,12 +5,11 @@ import {
   Button,
   Row,
   Col,
-  Spinner,
   ProgressBar,
 } from "react-bootstrap";
 import { userService } from "../utils/api/userService";
 import { useAuth } from "../context/AuthProvider";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
   const { isUserLogged, login } = useAuth();
@@ -176,7 +175,6 @@ const LoginPage = () => {
 
           <Button variant="primary" type="submit" className="w-100">
             {isRegistering ? "Zarejestruj się" : "Zaloguj się"}
-            {/* <Spinner animation="border" size="xl" variant="info" /> */}
           </Button>
         </Form>
         <Row className="mt-3">

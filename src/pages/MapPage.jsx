@@ -1,11 +1,11 @@
 import React from "react";
 import MapComponent from "../components/MapComponent";
 
-function MapPage({ pointsOfInterest }) {
+function MapPage() {
   return (
     <>
       <div>
-        <MapComponent points={pointsOfInterest} />
+        <MapComponent />
       </div>
     </>
   );

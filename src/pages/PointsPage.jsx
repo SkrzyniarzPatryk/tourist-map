@@ -4,9 +4,6 @@ import {
   Row,
   Col,
   Form,
-  Button,
-  Card,
-  Badge,
   Spinner,
   Pagination,
 } from "react-bootstrap";
@@ -79,7 +76,6 @@ const PointsPage = ({ pois }) => {
 
   return (
     <Container className="py-3" data-bs-theme="dark">
-      {/* Sekcja filtrów */}
       <Row className="mb-4" style={{ color: "#fff" }}>
         <Col md={3}>
           <Form.Group controlId="category">
@@ -121,7 +117,6 @@ const PointsPage = ({ pois }) => {
         </Col>
       </Row>
 
-      {/* Pasek oddzielający */}
       <div
         style={{
           borderBottom: "2px solid #444",
@@ -129,7 +124,6 @@ const PointsPage = ({ pois }) => {
         }}
       ></div>
 
-      {/* Sekcja z kartami */}
       <Row className="g-4">
         {pointsWitchDescr.data?.map((point) => (
           <Col md={4} key={point.id}>

@@ -6,7 +6,6 @@ import { set, useForm } from "react-hook-form";
 import { useEffect } from "react";
 import SelectImagesModal from "./SelectImagesModal";
 import { pointsService } from "../../utils/api/pointsService";
-import { formToJSON } from "axios";
 import { category } from "../../models/Category";
 import { useAuth } from "../../context/AuthProvider";
 

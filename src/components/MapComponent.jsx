@@ -21,8 +21,6 @@ import marker2 from "../assets/markers/location-pin-2.png";
 import marker3 from "../assets/markers/small-location-pin.png";
 import PointCardComponent from "./PointsPageComponents/PointCardComponent";
 import AddPointModal from "./MapPage/AddPointModal";
-import { Control } from "leaflet";
-import { Card, ListGroup } from "react-bootstrap";
 import RouteCard from "./MapPage/RouteCard";
 
 const MapComponent = () => {

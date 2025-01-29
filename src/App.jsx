@@ -20,9 +20,6 @@ import PointDetailPage from "./pages/PointDetailPage";
 import UserProfile from "./pages/UserProfile";
 import UserPoints from "./pages/UserPoints";
 
-const pointsOfInterest = [];
-const tmp = true;
-
 function App() {
   const router = createBrowserRouter([
     {
@@ -56,8 +53,8 @@ function App() {
         },
         {
           path: "user-points",
-          element: <UserPoints/>,
-        }
+          element: <UserPoints />,
+        },
       ],
     },
     {

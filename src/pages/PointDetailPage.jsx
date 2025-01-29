@@ -12,7 +12,7 @@ import {
   Spinner,
 } from "react-bootstrap";
 import { pointsService } from "../utils/api/pointsService";
-import { commentsService } from "../utils/api/CommentsService";
+import { commentsService } from "../utils/api/commentsService";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import { category } from "../models/Category";
 
@@ -153,7 +153,6 @@ const PointDetailPage = () => {
     objectFit: "cover",
   };
 
-  // Sortowanie komentarzy po dacie
   const sortedComments = [...comments].sort(
     (a, b) => new Date(b.createdAt) - new Date(a.createdAt),
   );
@@ -236,7 +235,6 @@ const PointDetailPage = () => {
             style={{ backgroundColor: "#2b2b2b" }}
           >
             {" "}
-            {/* Ciemniejsze tło dla kontenera */}
             {sortedComments
               .slice(0, showAllComments ? sortedComments.length : 3)
               .map((comment) => (
@@ -246,14 +244,12 @@ const PointDetailPage = () => {
                   style={{ backgroundColor: "#343a40" }}
                 >
                   {" "}
-                  {/* Szare tło dla karty */}
                   <Card.Body>
                     <div>
                       <div className="d-flex justify-content-between align-items-center mb-2">
                         <div className="d-flex align-items-center">
                           <strong className="me-3 text-light">
                             {" "}
-                            {/* Jasny tekst */}
                             <i className="bi bi-person-circle me-2"></i>
                             {comment.username}
                           </strong>
@@ -265,7 +261,6 @@ const PointDetailPage = () => {
                       </div>
                       <small className="text-light opacity-75 d-block mb-2">
                         {" "}
-                        {/* Jaśniejszy tekst dla daty */}
                         {comment.createdAt
                           ? new Date(comment.createdAt).toLocaleDateString(
                               "pl-PL",
@@ -280,7 +275,6 @@ const PointDetailPage = () => {
                           : "Data niedostępna"}
                       </small>
                       <p className="mb-0 text-light">{comment.content}</p>{" "}
-                      {/* Jasny tekst dla treści */}
                     </div>
                   </Card.Body>
                 </Card>
@@ -302,7 +296,6 @@ const PointDetailPage = () => {
         </Col>
       </Row>
 
-      {/* Formularz dodawania opinii */}
       <Row className="justify-content-center mt-5">
         <Col md={10}>
           <div
@@ -310,7 +303,6 @@ const PointDetailPage = () => {
             style={{ backgroundColor: "#2b2b2b" }}
           >
             {" "}
-            {/* Ciemniejsze tło dla formularza */}
             <h3 className="text-white text-center mb-4">Napisz Recenzję</h3>
             <Form onSubmit={handleAddComment}>
               <Form.Group controlId="rating">
@@ -331,7 +323,6 @@ const PointDetailPage = () => {
 
                     let value = parseFloat(inputValue);
                     if (!isNaN(value)) {
-                      // Konwertuj wprowadzone cyfry na format X.X
                       if (
                         inputValue.length === 2 &&
                         !inputValue.includes(".")
@@ -339,9 +330,7 @@ const PointDetailPage = () => {
                         value = parseFloat(inputValue[0] + "." + inputValue[1]);
                       }
 
-                      // Ogranicz do zakresu 1-5
                       value = Math.min(Math.max(value, 1), 5);
-                      // Ogranicz do jednego miejsca po przecinku
                       value = Math.round(value * 10) / 10;
                       setNewComment({ ...newComment, rating: value });
                     }
@@ -374,7 +363,7 @@ const PointDetailPage = () => {
                     color: "white",
                     border: "1px solid #495057",
                   }}
-                  className="custom-textarea" // dodajemy klasę
+                  className="custom-textarea"
                 />
               </Form.Group>
 

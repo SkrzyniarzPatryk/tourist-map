@@ -4,7 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import usserAccountLogo from "../assets/user_icon.png";
 import { useAuth } from "../context/AuthProvider";
-import { commentsService } from "../utils/api/CommentsService";
+import { commentsService } from "../utils/api/commentsService";
 import { pointsService } from "../utils/api/pointsService";
 import { useNavigate } from "react-router-dom";
 
