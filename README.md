@@ -1,5 +1,11 @@
-Run db
+# How to install
+npm install
+
+# How to run
 npx json-server db.json
+
+npm run dev
+
 
 # React + Vite
 
