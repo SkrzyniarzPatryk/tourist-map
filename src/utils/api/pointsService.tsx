@@ -3,7 +3,7 @@ import { BaseApi } from "./baseApi";
 
 class PointsService extends BaseApi {
   constructor() {
-    super("/points");
+    super("/Points");
   }
 
   async getAllPoints(): Promise<PointModel[]> {
