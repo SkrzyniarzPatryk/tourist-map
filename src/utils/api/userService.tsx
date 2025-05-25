@@ -4,12 +4,6 @@ class UserService extends BaseApi {
   constructor() {
     super("/Auth");
   }
-  // async login(data: LoginUserModel): Promise<any> {
-  //   const query = `?username=${data.username}&password=${data.password}`;
-  //   let response = await this.get<any>(query);
-  //   return response.length == 1 ? response : false;
-  // }
-  // funckja logująca postem
   async login(data: LoginUserModel): Promise<any> {
     const response = await this.post<any>("/login", data);
     return response;

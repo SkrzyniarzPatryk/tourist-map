@@ -28,7 +28,7 @@ export const AuthProvider = ({ children }) => {
   const logout = () => {
     try {
       const response = userService.logout();
-      if (response) {
+      if (response && response.status === 200) {
         alert("Wylogowano pomyślnie");
       }
     } catch (error) {

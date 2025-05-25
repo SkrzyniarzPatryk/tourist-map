@@ -1,25 +1,41 @@
 import React, { useEffect, useState } from "react";
-import { Button, Card, Container, Row, Col } from "react-bootstrap";
+import {
+  Button,
+  Card,
+  Container,
+  Row,
+  Col,
+  Modal,
+  Spinner,
+} from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import usserAccountLogo from "../assets/user_icon.png";
 import { useAuth } from "../context/AuthProvider";
 import { commentsService } from "../utils/api/commentsService";
 import { pointsService } from "../utils/api/pointsService";
-import { useNavigate } from "react-router-dom";
-
+import { useNavigate, useLocation } from "react-router-dom";
+import { paymentsService } from "../utils/api/paymentsService"; // Dodaj import
+import { userService } from "../utils/api/userService";
 const UserProfile = () => {
   const navigate = useNavigate();
-  const { isUserLogged, user } = useAuth();
+  const { isUserLogged, user, login } = useAuth();
+  const [isUserPremium, setIsUserPremium] = useState(false);
   const [commentsAmount, setCommentsAmount] = useState(0);
   const [pointsAmount, setPointsAmount] = useState(0);
 
+  const [showPremium, setShowPremium] = useState(false);
+  const [showProcessing, setShowProcessing] = useState(false);
+  const [paymentConfirmed, setPaymentConfirmed] = useState(false);
+  const [showFailure, setShowFailure] = useState(false);
+  const [failureToken, setFailureToken] = useState("");
   const [password, setPassword] = useState("••••••••");
 
   useEffect(() => {
     if (isUserLogged) {
       getCommentsAmount();
       getPointsAmount();
+      setIsUserPremium(user?.isPremium || false);
     }
   }, []);
 
@@ -30,18 +46,93 @@ const UserProfile = () => {
     }
   }, [isUserLogged, navigate]);
 
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    if (params.get("status") === "success") {
+      const payPalId = params.get("token");
+      if (payPalId) {
+        setShowProcessing(true);
+        setShowPremium(false);
+        checkPaymentStatus(payPalId);
+      }
+    }
+    if (params.get("status") === "failure") {
+      const token = params.get("token");
+      setFailureToken(token || "");
+      setShowFailure(true);
+      setShowPremium(false);
+      setShowProcessing(false);
+    }
+  }, [location.search]);
+
+  const checkPaymentStatus = async (payPalId) => {
+    console.log("PayPal ID:", payPalId);
+    let tries = 0;
+    const maxTries = 10;
+    const interval = setInterval(async () => {
+      tries++;
+      try {
+        const result = await paymentsService.checkPaymentStatus(payPalId);
+        if (result.transactionStatus === "confirmed") {
+          clearInterval(interval);
+          setPaymentConfirmed(true);
+
+          console.log(result);
+
+          // Aktualizacja statusu użytkownika na Premium
+          try {
+            const result = await userService.googleLoginConfirm();
+            if (result) {
+              console.log(result);
+              login(result);
+              setIsUserPremium(true);
+            }
+          } catch (error) {
+            console.error(
+              "Błąd podczas aktualizacji statusu użytkownika:",
+              error,
+            );
+          }
+
+          setTimeout(() => setShowProcessing(false), 2000);
+        }
+      } catch (e) {
+        console.error("Błąd sprawdzania statusu płatności:", e);
+      }
+      if (tries >= maxTries) {
+        clearInterval(interval);
+        setShowProcessing(false);
+        setShowFailure(true);
+      }
+    }, 2000);
+  };
+
+  const handleStartPayment = async () => {
+    try {
+      const response = await paymentsService.startPayment({
+        ProductName: "PREMIUM",
+      });
+      if (response) {
+        console.log(response.approvalUrl);
+        window.location.href = response.approvalUrl;
+      }
+    } catch (e) {
+      alert("Błąd inicjowania płatności");
+    }
+  };
+
   const getCommentsAmount = async () => {
     try {
-      const response = await commentsService.getCommentsByUserId(user.id);
-      setCommentsAmount(response.length);
+      // const response = await commentsService.getCommentsByUserId(user.id);
+      // setCommentsAmount(response.length);
     } catch (error) {
       console.error(error);
     }
   };
   const getPointsAmount = async () => {
     try {
-      const response = await pointsService.getPointsByUserId(user.id);
-      setPointsAmount(response.length);
+      // const response = await pointsService.getPointsByUserId(user.id);
+      // setPointsAmount(response.length);
     } catch (error) {
       console.error(error);
     }
@@ -146,6 +237,131 @@ const UserProfile = () => {
                 </Card.Body>
               </Card>
             </Col>
+          </Row>
+          <Row className="mt-4">
+            <div className="d-flex justify-content-center mt-0">
+              <Button
+                variant="warning"
+                className="d-flex align-items-center gap-2 px-4 py-2 shadow"
+                style={{
+                  fontWeight: "bold",
+                  fontSize: "1.2rem",
+                  borderRadius: "30px",
+                }}
+                disabled={isUserPremium}
+                onClick={() => setShowPremium(true)}
+              >
+                <i
+                  className="bi bi-star-fill"
+                  style={{ fontSize: "1.5rem" }}
+                ></i>
+                {isUserPremium ? "Masz konto Premium" : "Zostań Premium"}
+              </Button>
+            </div>
+
+            {/* MODAL PREMIUM */}
+            <Modal
+              show={showPremium}
+              onHide={() => setShowPremium(false)}
+              centered
+              contentClassName="bg-dark text-light"
+            >
+              <Modal.Header closeButton closeVariant="white">
+                <Modal.Title>
+                  <i className="bi bi-star-fill text-warning me-2"></i>
+                  Konto Premium
+                </Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                <h5 className="mb-3">Dlaczego warto?</h5>
+                <ul>
+                  <li>Brak reklam</li>
+                  <li>Dostęp do ekskluzywnych punktów i tras</li>
+                  <li>Priorytetowe wsparcie</li>
+                  <li>Specjalna odznaka przy profilu</li>
+                </ul>
+                <div className="text-center mt-4">
+                  <Button
+                    variant="warning"
+                    size="lg"
+                    className="d-flex align-items-center gap-2 px-4 py-2"
+                    style={{ fontWeight: "bold", borderRadius: "30px" }}
+                    onClick={handleStartPayment}
+                    disabled={isUserPremium}
+                  >
+                    <i className="bi bi-credit-card-2-front-fill"></i>
+                    Zapłać 19,99 zł
+                  </Button>
+                </div>
+              </Modal.Body>
+            </Modal>
+
+            {/* MODAL PRZETWARZANIA */}
+            <Modal
+              show={showProcessing}
+              onHide={() => setShowProcessing(false)}
+              centered
+              contentClassName="bg-dark text-light"
+            >
+              <Modal.Header>
+                <Modal.Title>
+                  <i className="bi bi-credit-card-2-front-fill text-warning me-2"></i>
+                  Przetwarzanie płatności
+                </Modal.Title>
+              </Modal.Header>
+              <Modal.Body className="text-center">
+                {!paymentConfirmed ? (
+                  <>
+                    <Spinner
+                      animation="border"
+                      variant="warning"
+                      className="mb-3"
+                    />
+                    <div>Trwa potwierdzanie płatności...</div>
+                  </>
+                ) : (
+                  <>
+                    <i
+                      className="bi bi-check-circle-fill text-success"
+                      style={{ fontSize: "2.5rem" }}
+                    ></i>
+                    <div className="mt-3">
+                      Płatność potwierdzona! Dziękujemy za wsparcie.
+                    </div>
+                  </>
+                )}
+              </Modal.Body>
+            </Modal>
+            <Modal
+              show={showFailure}
+              onHide={() => setShowFailure(false)}
+              centered
+              contentClassName="bg-dark text-light"
+            >
+              <Modal.Header closeButton closeVariant="white">
+                <Modal.Title>
+                  <i className="bi bi-x-circle-fill text-danger me-2"></i>
+                  Niepowodzenie płatności
+                </Modal.Title>
+              </Modal.Header>
+              <Modal.Body className="text-center">
+                <p>
+                  Niestety nie udało się potwierdzić płatności.
+                  <br />
+                  Jeśli środki zostały pobrane, skontaktuj się z administratorem
+                  i podaj ten identyfikator:
+                </p>
+                <div className="bg-secondary rounded p-2 my-3 text-break">
+                  <strong>{failureToken}</strong>
+                </div>
+                <Button
+                  variant="secondary"
+                  onClick={() => setShowFailure(false)}
+                >
+                  Zamknij
+                </Button>
+              </Modal.Body>
+            </Modal>
           </Row>
         </Col>
       </Row>
