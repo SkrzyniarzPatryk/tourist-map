@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
+import { userService } from "../utils/api/userService";
 
 const AuthContext = createContext();
 
@@ -8,6 +9,11 @@ export const AuthProvider = ({ children }) => {
     const storedUser = localStorage.getItem("user");
     console.log(!!localStorage.getItem("user"));
     return storedUser ? JSON.parse(storedUser) : null;
+    // return {
+    //   id: "",
+    //   username: "",
+    //   email: ""
+    // };
   });
   const [isUserLogged, setIsUserLogged] = useState(
     !!localStorage.getItem("user"),
@@ -20,6 +26,15 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logout = () => {
+    try {
+      const response = userService.logout();
+      if (response) {
+        alert("Wylogowano pomyślnie");
+      }
+    } catch (error) {
+      console.error("Logout error:", error);
+      alert("Wystąpił błąd podczas wylogowywania");
+    }
     setUser(null);
     setIsUserLogged(false);
     localStorage.removeItem("user");
@@ -39,4 +54,3 @@ export const useAuth = () => {
   }
   return context;
 };
-

@@ -6,10 +6,26 @@ export class BaseApi {
   constructor(subUrl: string) {
     this.api = axios.create({
       baseURL: import.meta.env.VITE_API_BASE_URL + subUrl,
+      withCredentials: true,
       headers: {
         "Content-Type": "application/json",
       },
     });
+    // this.api.interceptors.response.use(
+    //   (res) => res,
+    //   async (err) => {
+    //     if (err.response.status === 401) {
+    //       try {
+    //         await this.api.get("/auth/refresh");
+    //         return this.api.request(err.config);
+    //       } catch (e) {
+    //         // Handle token refresh failure
+    //         console.error("Token refresh failed", e);
+    //       }
+    //     }
+    //     return Promise.reject(err);
+    //   },
+    // );
   }
 
   protected async get<T>(url: string, config?: AxiosRequestConfig): Promise<T> {

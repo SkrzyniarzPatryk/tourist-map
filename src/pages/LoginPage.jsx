@@ -33,6 +33,21 @@ const LoginPage = () => {
     }
   }, [isUserLogged, navigate]);
 
+  useEffect(() => {
+    async function confirmGoogleLogin() {
+      try {
+        const response = await userService.googleLoginConfirm();
+        console.log("Google login confirm response:", response);
+        login(response);
+      } catch (err) {
+        console.error("Google login confirm error:", err);
+      }
+    }
+    const params = new URLSearchParams(window.location.search);
+    const authType = params.get("type");
+    if (authType === "googlelogin") confirmGoogleLogin();
+  }, []);
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setUserDataQuery({ ...userDataQuery, [name]: value });
@@ -59,11 +74,11 @@ const LoginPage = () => {
   const handleLogin = async () => {
     try {
       const response = await userService.login({
-        username: userDataQuery.username,
+        login: userDataQuery.username,
         password: userDataQuery.password,
       });
       if (response) {
-        login(response[0]);
+        login(response);
         setStatus({ ...status, status: "success", loading: true });
       } else {
         setStatus({ ...status, status: "danger", loading: true });
@@ -71,11 +86,20 @@ const LoginPage = () => {
       }
     } catch (err) {
       setStatus({ ...status, status: "danger", loading: true });
+      alert("Błąd logowania! odp od serwera: " + err.response?.data);
       console.error("error", err);
     } finally {
       setTimeout(() => {
         setStatus({ ...status, loading: false });
       }, 2000);
+    }
+  };
+  const handleGoogleLogin = async () => {
+    try {
+      const response = await userService.googleLogin();
+      console.log("Google login response:", response);
+    } catch (err) {
+      console.error("Google login error:", err);
     }
   };
   const handlRegister = async () => {
@@ -84,7 +108,7 @@ const LoginPage = () => {
         username: userDataQuery.email.split("@")[0],
         email: userDataQuery.email,
         password: userDataQuery.password,
-        favoritePoints: [],
+        // favoritePoints: [],
       });
       if (response) {
         console.log("response", response);
@@ -177,6 +201,18 @@ const LoginPage = () => {
             {isRegistering ? "Zarejestruj się" : "Zaloguj się"}
           </Button>
         </Form>
+        {/* Logowanie za pomocą google - przycisk z logiem google */}
+        <Row className="mt-3">
+          <Col className="text-center">
+            <Button
+              variant="outline-secondary"
+              className="w-100"
+              onClick={handleGoogleLogin}
+            >
+              Zaloguj się przez Google
+            </Button>
+          </Col>
+        </Row>
         <Row className="mt-3">
           <Col className="text-center">
             {isRegistering ? (
