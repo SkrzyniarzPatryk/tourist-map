@@ -3,7 +3,7 @@ import { BaseApi } from "./baseApi";
 
 class PointsService extends BaseApi {
   constructor() {
-    super("/points");
+    super("/Points");
   }
 
   async getAllPoints(): Promise<PointModel[]> {
@@ -11,7 +11,7 @@ class PointsService extends BaseApi {
   }
   async getPaginatedPagePoints(paginatedQuery): Promise<PointModel[]> {
     let query =
-      "?_page=" +
+      "/paginated?_page=" +
       paginatedQuery.page +
       "&_per_page=" +
       paginatedQuery.pageSize +
@@ -37,7 +37,7 @@ class PointsService extends BaseApi {
     point.reviews = 0;
     return this.post<PointModel>("", point);
   }
-  
+
   async updatePointRating(
     pointId: string,
     newRating: number,
