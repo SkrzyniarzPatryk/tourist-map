@@ -55,12 +55,8 @@ const PointDetailPage = () => {
     try {
       const newCommentData = {
         pointId: id,
-        userId: user.id,
-        username: user.username,
         content: newComment.content,
         rating: newComment.rating,
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
       };
 
       // Dodaj nowy komentarz
@@ -84,12 +80,7 @@ const PointDetailPage = () => {
         (totalRating / updatedCommentsResponse.length).toFixed(1),
       );
 
-      // Zaktualizuj punkt w bazie danych
-      await pointsService.updatePointRating(
-        id,
-        newAverageRating,
-        updatedCommentsResponse.length,
-      );
+      
 
       // Zaktualizuj lokalny stan punktu
       setPoint((prev) => ({

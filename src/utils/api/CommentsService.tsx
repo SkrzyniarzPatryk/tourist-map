@@ -17,11 +17,8 @@ class CommentsService extends BaseApi {
 
   async addComment(comment: {
     pointId: string;
-    userId: string;
     content: string;
     rating: number;
-    createdAt: string;
-    updatedAt: string;
   }): Promise<any> {
     return this.post<any>("", comment);
   }
